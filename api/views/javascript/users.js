@@ -21,33 +21,41 @@ createBtn.addEventListener('click', createUser);
 
 async function createUser(event) {
     event.preventDefault();
-
+    
     try {
         let user = {
-            name: userName.value,
-            lastname: userLastname.value,
-            email: userEmail.value,
-            profile: userProfile.value,
-            password: userPassword.value
+            username: usuarioInput.value,
+            email: emailInput.value,
+            password: passwordInput.value,
+            nombre: nombreInput.value,
+            apellido: apellidoInput.value
+            
+            //perfil: perfilInput.value,
+            
         };
-    
+        console.log(user);
+        
         let userCreate = await fetch(`${APP_SERVER}/user/signup`, {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json",
+                'Accept': 'application/json',
+                'Content-Type': 'application/json', 
                 "access-token": `${token}`
             },
             body: JSON.stringify(user)
+            
         });
     
         let userCreated = await userCreate.json();
-    
+        
+        console.log(userCreated);
         if (userCreated) {
             addUserContainer.style.display = 'none';
             location.reload();
         }
     } catch (error) {
-        errorMessages.textContent = error;
+        //errorMessages.textContent = error;
+        console.log(error);
     }
 };
 
