@@ -1,7 +1,0 @@
-function upload() {
-
-}
-
-function agregarContacto() {
-    
-}
