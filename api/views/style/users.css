@@ -1,0 +1,72 @@
+header{
+    margin: 1 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: CornflowerBlue;
+    padding: 20px;
+}
+
+header .menu_opciones{
+    display: flex;
+    flex: row;
+    justify-content: flex-end;
+    background-color: CornflowerBlue;
+}
+
+a {
+    margin: 5px;
+    padding-left: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    text-decoration: none;
+}
+
+a ::after{
+    color: white;
+}
+
+header img {
+    width: 55px;
+    height: 55px;
+}
+
+.alta {
+    margin: auto;
+    width: 80%;
+    padding: 10px;
+    text-align: center;   
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+form{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+form .form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 400px;
+    align-items: center;
+}
+
+form input{
+    margin: 15px; 
+    border-radius: 25px;
+    text-align: center;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+.crear {
+    width: 150px;
+}
+

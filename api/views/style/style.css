@@ -1,0 +1,55 @@
+
+header{
+    margin: 20px;
+}
+
+header .menu_opciones{
+    display: none;
+}
+
+header img {
+    width: 55px;
+    height: 55px;
+}
+
+.login {
+    margin: auto;
+    width: 80%;
+    padding: 10px;
+    text-align: center;   
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+form{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+form input{
+    margin: 15px; 
+    border-radius: 25px;
+    text-align: center;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+@media screen and (min-width: 800px) {
+
+    form{
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+
+    form input{
+       width: 255px;
+    }
+}
