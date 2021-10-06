@@ -1,41 +1,41 @@
 const { Schema, model } = require('mongoose');
 
-// City 
-const citySchema = new Schema({
-    name: {
+//cuidad no esta asociada a nada
+const ciudadSchema = new Schema({
+    nombre: {
         type: String,
         unique: true
     }
 });
 
-const city = model('City', citySchema);
-
-// Country 
-const countrySchema = new Schema({
-    name: {
+const paisSchema = new Schema({
+    nombre: {
         type: String,
         unique: true
     },
-    cities: [{
+    ciudades: [{
         type: Schema.Types.ObjectId,
-        ref: 'City'
+        ref: 'Ciudad'
     }]
 });
 
-const country = model('Country', countrySchema);
-
-// Region 
 const regionSchema = new Schema({
-    name: {
+    nombre: {
         type: String,
         unique: true
     },
-    countries: [{
+    paises: [{
         type: Schema.Types.ObjectId,
-        ref: 'Country'
+        ref: 'Pais'
     }]
 });
 
+const ciudad = model('Ciudad', ciudadSchema);
+const pais = model('Pais', paisSchema);
 const region = model('Region', regionSchema);
 
-module.exports = { regionSchema: region, countrySchema: country, citySchema: city };
+module.exports = { 
+    regionSchema: region, 
+    paisSchema: pais, 
+    ciudadSchema: ciudad 
+};

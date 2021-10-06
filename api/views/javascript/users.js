@@ -13,7 +13,7 @@ const profile = JSON.parse(localStorage.getItem('profile'));
 let loginHeaders = new Headers();
 loginHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-const APP_SERVER = "http://localhost:3022";
+const SERVER_URL = "http://localhost:3022";
 
 //listeners
 // Create User listener
@@ -35,7 +35,7 @@ async function createUser(event) {
         };
         console.log(user);
         
-        let userCreate = await fetch(`${APP_SERVER}/user/signup`, {
+        let userCreate = await fetch(`${SERVER_URL}/user/signup`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

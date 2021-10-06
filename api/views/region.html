@@ -18,14 +18,36 @@
         </div>
     </header>
     <section>
-        <div>
-            <button>Agregar Region</button>
+        <div class="agregar">
+            <button><a href="abmRegion.html">Agregar Region</a></button>
         </div>
+        <div class="arbolRegiones">
+            <ul id="myUL">
+                <li><span class="caret">Region</span><button><a href="abmRegion.html">Agregar Pais</a></button>
+                  <ul class="nested">
+                    <li><span class="caret">Pais</span><button>Editar</button><button>Borrar</button><button><a href="abmRegion.html">Agregar Ciudad</a></button>
+                        <ul class="nested">
+                            <li class="flexar"><div>Ciudad</div><button>Editar</button><button>Borrar</button></li>
+                            <li class="flexar"><div>Ciudad</div><button>Editar</button><button>Borrar</button></li>
+                            <li class="flexar"><div>Ciudad</div><button>Editar</button><button>Borrar</button></li>
+                        </ul>
+                      </li>
+                    <li><span class="caret">Pais</span><button>Editar</button><button>Borrar</button><button><a href="abmRegion.html">Agregar Ciudad</a></button>
+                      <ul class="nested">
+                        <li class="flexar"><div>Ciudad</div><button>Editar</button><button>Borrar</button></li>
+                        <li class="flexar"><div>Ciudad</div><button>Editar</button><button>Borrar</button></li>
+                        <li class="flexar"><div>Ciudad</div><button>Editar</button><button>Borrar</button></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+            </ul> 
 
+        </div>
 
 
     </section>
 
-    
+    <script src="javascript/region.js" async></script>
 </body>
 </html>

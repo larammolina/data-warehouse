@@ -30,3 +30,87 @@ a {
 a ::after{
     color: white;
 }
+
+
+/* Remove default bullets */
+ul, #myUL {
+    list-style-type: none;
+}
+  
+/* Remove margins and padding from the parent ul */
+#myUL {
+    margin: 0;
+    padding: 0;
+}
+  
+/* Style the caret/arrow */
+.caret {
+    cursor: pointer;
+    user-select: none; /* Prevent text selection */
+}
+  
+/* Create the caret/arrow with a unicode, and style it */
+.caret::before {
+    content: "\25B6";
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+}
+  
+/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+.caret-down::before {
+    transform: rotate(90deg);
+}
+  
+/* Hide the nested list */
+.nested {
+    display: none;
+}
+  
+/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+.active {
+    display: block;
+} 
+
+button{
+    margin: 10px;
+    background-color: CornflowerBlue;
+    margin: 15px; 
+    border-radius: 25px;
+    text-align: center;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+.flexar{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+form {
+    margin: 20px;
+}
+
+form .form, form label, form select{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 400px;
+    align-items: center;
+}
+
+form select {
+    border-radius: 25px;
+    margin: 10px;
+}
+
+form input{
+    margin: 15px; 
+    border-radius: 25px;
+    text-align: center;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}

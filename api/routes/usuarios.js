@@ -14,7 +14,7 @@ const User = require("./../models/usuarios");
 //AGREGAR MIDDLEWARE PARA VERIFICAR EL JWT
 //AGREGAR CODIGO PARA VERIFICAR JWT DEL ADMIN
 
-async function verifyJWT(req, res, next) {
+async function verifyJWT(req, res, next) { 
   const usertoken = req.headers['access-token'];
   console.log("USERTKN " + usertoken);
   if(usertoken != undefined) {

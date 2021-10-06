@@ -11,10 +11,11 @@ const config = require('./config');
 const iniciarMongoDB = require('./db/db.js');
 
 //endpoint usuario
-const user = require("./routes/usuarios"); //new addition
-
+const user = require("./routes/usuarios");
 //endpoint api
-const endpoints = require("./routes/endpoints"); //new addition
+const home = require("./routes/home");
+//endpoint api
+const regiones = require("./routes/regiones");
 
 
 iniciarMongoDB();
@@ -44,4 +45,6 @@ app.listen(config.API_PORT, () => {
  */
  app.use("/user", user);
 
- app.use("/", endpoints);
+ app.use("/", home);
+
+ app.use("/regiones", regiones);
