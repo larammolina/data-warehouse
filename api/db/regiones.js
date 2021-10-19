@@ -3,12 +3,12 @@ const { ciudadSchema, paisSchema, regionSchema } = require('../models/regiones')
 // Create Region
 async function crearRegion(region) {
     try {
-        console.log("NEW REGION -| "+ region)
+        console.log("NEW REGION -| " + region)
         const nuevaRegion = new regionSchema(region);
         const { _id } = await nuevaRegion.save();
         console.log("Se creo region OK! ID: " + _id);
         return _id;
-    } catch(error) {
+    } catch (error) {
         console.log("Error creando la region: " + error);
     }
 };
@@ -16,19 +16,19 @@ async function crearRegion(region) {
 // Get Regions
 async function consultarRegiones() {
     try {
-        let regiones = await regionSchema.find({}, {__v:0}).populate(
+        let regiones = await regionSchema.find({}, { __v: 0 }).populate(
             {
-                path: 'pais ciudad',
+                path: 'paises ciudades',
                 strictPopulate: false,
                 select: 'nombre',
                 populate: {
-                    path: 'ciudad',
+                    path: 'ciudades',
                     select: 'nombre'
                 }
             }
         );
         return regiones;
-    } catch(error) {
+    } catch (error) {
         console.log("Error consultando Region: " + error);
     }
 };
@@ -37,6 +37,7 @@ async function consultarRegiones() {
 async function actualizarRegion(region, id) {
     try {
         let regionActualizada = await regionSchema.updateOne(id, region);
+        console.log("Regio actualz. "+regionActualizada)
         if (regionActualizada) {
             console.log("Se actualizo region OK!");
             return regionActualizada;
@@ -46,35 +47,47 @@ async function actualizarRegion(region, id) {
     }
 };
 
-// Delete an existing Region
 async function eliminarRegion(id) {
+    /*
+    1- busco los paises asociados al ID region.
+    2- busco las cuidades asociadas al ID paises.
+
+    3- Borro las ciudades por ID.
+    4- Borro los paises por ID
+    5- Borro la region
+    */
     try {
-        // Search for the region
+        //console.log("ID A BORRAR " + id);
         let { paises } = await regionSchema.findOne(id);
-
-        // Before deleting the region, first I need to delete each city that belongs to the country, and finally the country
+        //console.log("PAISES: "+ paises);
+        //Primero busco el pais
         paises.forEach(async (paisesId) => {
-            // Find the ids of the cities on each country inside the region
-            let { ciudades } = await paisesSchema.findById(paisesId);
-
-            // Delete each city
+            
+            console.log("PAISES: "+ paisesId);
+            //con los paises saco las ciudades, para borrar los IDs primerp
+            let { ciudades } = await paisSchema.findById(paisesId);
             ciudades.forEach(async (ciudadId) => {
-                await ciudadesSchema.findByIdAndDelete(ciudadesId);
+                
+                console.log("CAIUDAD: "+ ciudadId);
+                await ciudadSchema.findByIdAndDelete(ciudadId); //Borro las ciudades por ID
             });
-
-            // Finally, delete the Country
-            await paisesSchema.findByIdAndDelete(paisesId);
+            
+            //despues borro el pais.
+            await paisSchema.findByIdAndDelete(paisesId);
         });
-
-        // Now I can delete the Region
+        
+        // borro la Region
         let regionBorrar = await regionSchema.findByIdAndDelete(id);
+        console.log("LLEgue hasta aca... " + regionBorrar + " id " + id)
 
         if (regionBorrar) {
-            console.log("[INFO] Region successfully deleted!");
+            console.log("Region Borrada OK!");
             return regionBorrar;
+        }else{
+            console.log("Error borrando region-----!");
         }
     } catch (error) {
-        console.log("[ERROR] There was an error while trying to delete the Region, error msg: " + error.message);
+        console.log("Error borrando region... " + error);
     }
 };
 

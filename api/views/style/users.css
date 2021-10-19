@@ -3,7 +3,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: CornflowerBlue;
+    background-color: #B8860B;
     padding: 20px;
 }
 
@@ -11,7 +11,7 @@ header .menu_opciones{
     display: flex;
     flex: row;
     justify-content: flex-end;
-    background-color: CornflowerBlue;
+    background-color: #B8860B;
 }
 
 a {

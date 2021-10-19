@@ -27,13 +27,14 @@ async function verifyJWT(req, res, next) {
     }
 }
 
-/**
+/** ----OK-----
  * @method - GET
  * @param - /regiones/consultaRegiones
  * @description - Consulta todas las regiones
  */
 app.get("/consultaRegiones", verifyJWT, async (req, res) => {
     try {
+        console.log("GET /consultaRegiones ")
         let regiones = await consultarRegiones();
         if (regiones) {
             res.status(201).send({ datos: regiones });
@@ -46,37 +47,36 @@ app.get("/consultaRegiones", verifyJWT, async (req, res) => {
     //res.send("Consultando...")
 });
 
-
-/**
- * @method - POST
- * @param - /regiones/editarRegiones/
- * @description - Edita una region
- */
- app.post("/editarRegiones", verifyJWT, async (req, res) => {
-    //console.log('index.html');
-    res.send("Consultando...")
-});
-
-
-/**
+/** ----OK-----
  * @method - DELETE
  * @param - /regiones/eliminarRegiones/
  * @description - Elimina una region
  */
- app.delete("/eliminarRegiones", verifyJWT, async (req, res) => {
-    //console.log('index.html');
-    res.send("Consultando...")
+app.delete("/eliminarRegiones/:_id", verifyJWT, async (req, res) => {
+    let req_id = req.params;
+    console.log(" DELETE/eliminarRegiones/:_id - " + req_id);
+    try {
+        let regionesBorradas = await eliminarRegion(req_id);
+        if (regionesBorradas) {
+            res.status(201).send({ datos: regionesBorradas });
+        } else {
+            res.status(401).send({ msg: "Error al eliminar region" });
+        }
+    } catch(err) {
+        res.status(500).send({ err: 'Error al eliminar region500' });
+    }
 });
 
 
-/**
- * @method - PUT
+/** ----OK-----
+ * @method - POST
  * @param - /regiones/agregarRegiones/
  * @description - Agregar una region
  */
- app.put("/agregarRegiones", verifyJWT, async (req, res) => {
+app.post("/agregarRegiones", verifyJWT, async (req, res) => {
     try {
         const region = req.body;
+        console.log("PUT /agregarRegiones")
         console.log("Datos de regiones: " + region);
         const regionCreada = await crearRegion(region);
         if (regionCreada) {
@@ -86,6 +86,23 @@ app.get("/consultaRegiones", verifyJWT, async (req, res) => {
         }
     } catch (error) {
         res.status(400).send({ error: "Error creando la region....: " + error });
+    }
+});
+
+/** ----OK-----
+ * @method - PUT
+ * @param - /regiones/editarRegiones/
+ * @description - Edita una region
+ */
+ app.put("/editarRegiones/:_id", verifyJWT, async (req, res) => {
+    try {
+        let regionEditar = req.body;
+        let regionID = req.params;
+        let regionModificada = await actualizarRegion(regionEditar, regionID);
+        //console.log(regionModificada)
+        res.status(201).send({ msg: "Region Actualizada OK!" });
+    } catch (err) {
+        res.status(400).send({ msg: 'Error while updating the Region: ' + err });
     }
 });
 
