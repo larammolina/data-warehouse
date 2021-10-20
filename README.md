@@ -18,7 +18,7 @@ TECNOLOGIAS
 
 Pasos a seguir para probar el trabajo pracito:
 
-1- Clonar Repositorio
-2- Instalar Mongo DB
-3- Instalar Node js
-4- NPM
+    1- Clonar Repositorio
+    2- Instalar Mongo DB
+    3- Instalar Node js
+    4- NPM
