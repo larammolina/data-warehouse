@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style/region.css" type="text/css" rel="stylesheet">
+
     <title>Data Warehouse - ABM Region</title>
 </head>
 <body>
@@ -17,14 +18,19 @@
             <a href="region.html">Región/Ciudad</a>
         </div>
     </header>
+    
     <section>
         <form class="form" action="agregarCiudad">
             <label for="regiones">Seleccione una Region:</label>
-            <select id="regiones" name="Regiones">
+            <select id="regiones" name="Regiones" onchange="cambioRegion();">
               
             </select>
-            <label for="cars">Seleccione un País:</label>
-            <select id="cars" name="pais">
+            <label for="paises">Seleccione un País:</label>
+            <select id="paises" name="pais" onchange="cambioPais();">
+
+            </select>
+            <label for="ciudades">Seleccione una Ciudad:</label>
+            <select id="ciudades" name="ciudad" >
               
             </select>
             <label for="cars">Agrege una Ciudad:</label>

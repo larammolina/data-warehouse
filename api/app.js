@@ -18,6 +18,8 @@ const home = require("./routes/home");
 const regiones = require("./routes/regiones");
 const paises = require("./routes/paises");
 const ciudades = require("./routes/ciudades");
+const companias = require("./routes/companias");
+const contactos = require("./routes/contactos");
 
 
 iniciarMongoDB();   //Inicio mongodb
@@ -43,3 +45,5 @@ app.use("/", home);
 app.use("/regiones", regiones);
 app.use("/paises", paises);
 app.use("/ciudades", ciudades);
+app.use("/companias", companias);
+app.use("/contactos", contactos);

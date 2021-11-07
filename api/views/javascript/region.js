@@ -2,7 +2,7 @@ const inputRegion = document.getElementById('input_region');
 const token = JSON.parse(localStorage.getItem('token'));
 const profile = JSON.parse(localStorage.getItem('profile'));
 
-const SERVER_URL = "http://localhost:3022";
+const SERVER_URL = "http://localhost:3022"; 
 
 var toggler = document.getElementsByClassName("caret");
 var i;

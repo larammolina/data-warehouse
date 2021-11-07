@@ -3,7 +3,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: CornflowerBlue;
+    background-color: #006241;
     padding: 20px;
 }
 
@@ -11,7 +11,7 @@ header .menu_opciones{
     display: flex;
     flex: row;
     justify-content: flex-end;
-    background-color: CornflowerBlue;
+    background-color: #006241;
 }
 
 header img {
@@ -27,8 +27,13 @@ a {
     text-decoration: none;
 }
 
+a:hover{
+    font-weight: bolder;
+}
+
 a ::after{
     color: white;
+
 }
 
 
@@ -74,9 +79,10 @@ ul, #myUL {
 
 button{
     margin: 10px;
-    background-color: #B8860B;
+    background-color: #006241;
     margin: 15px; 
     border-radius: 25px;
+    border-color: white;
     text-align: center;
     padding: 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;

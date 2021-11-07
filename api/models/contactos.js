@@ -1,15 +1,15 @@
 const { Schema, model } = require('mongoose');
 
-const contactSchema = new Schema({
-    name: {
+const contactoSchema = new Schema({
+    nombre: {
         type: String,
         required: true
     },
-    lastname: {
+    apellido: {
         type: String,
         required: true
     },
-    position: {
+    cargo: {
         type: String,
         required: true
     },
@@ -18,9 +18,9 @@ const contactSchema = new Schema({
         unique: true,
         required: true
     },
-    company: [{
+    compania: [{
         type: Schema.Types.ObjectId,
-        ref: 'Company',
+        ref: 'Compania',
         required: true
     }],
     region: [{
@@ -28,38 +28,39 @@ const contactSchema = new Schema({
         ref: 'Region',
         required: true
     }],
-    country: [{
+    pais: [{
         type: Schema.Types.ObjectId,
-        ref: 'Country'
+        ref: 'Pais'
     }],
-    city: [{
+    ciudad: [{
         type: Schema.Types.ObjectId,
-        ref: 'City'
+        ref: 'Ciudad'
     }],
-    address: {
+    direccion: {
         type: String,
         required: true
     },
-    interest: {
+    interes: {
         type: Number,
         required: true
     },
-   contactChannel: [{
+    canalDeContacto: [{
         type: Array,
-        channel: {
+        canal: {
             type: String,
-            enum: ['phone', 'whatsapp', 'linkedin', 'instagram', 'facebook'],
+            enum: ['telefono', 'whatsapp', 'instagram', 'facebook', 'linkedin'],
         },
-        userAccount: {
+        cuentaDeUsuario: {
             type: String
         },
-        preferences: {
+        preferencias: {
             type: String,
-            enum: ['favorite', 'do not bother', 'No preference'],
+            enum: ['sin preferencias', 'canal favorito', 'no molestar'],
         }
     }]
 });
+const contacto = model('Contacto', contactoSchema);
 
-const contact = model('Contact', contactSchema);
-
-module.exports = { contactSchema: contact };
+module.exports = {
+    contactoSchema: contacto
+};

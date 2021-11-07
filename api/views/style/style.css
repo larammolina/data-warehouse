@@ -20,6 +20,10 @@ header img {
     font-size: medium;
 }
 
+a:hover{
+    font-weight: bolder;
+}
+
 form{
     margin: auto;
     display: flex;
@@ -50,5 +54,9 @@ form input{
 
     form input{
        width: 255px;
+    }
+
+    a:hover{
+        font-weight: bolder;
     }
 }

@@ -1,27 +1,28 @@
 const { Schema, model } = require('mongoose');
 
-const companySchema = new Schema({
-    name: {
+const companiaSchema = new Schema({
+    nombre: {
         type: String,
         unique: true
     },
-    address: {
+    direccion: {
         type: String
     },
     email: {
         type: String,
         unique: true
     },
-    phone: {
+    telefono: {
         type: String,
         unique: true
     },
-    city: [{
+    ciudades: [{    //tiene asociadas ciudades
         type: Schema.Types.ObjectId,
-        ref: 'City'
+        ref: 'Ciudad'
     }]
 });
+const compania = model('Compania', companiaSchema);
 
-const company = model('Company', companySchema);
-
-module.exports = { companySchema: company };
+module.exports = { 
+    companiaSchema: compania 
+};
