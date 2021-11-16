@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style/region.css" type="text/css" rel="stylesheet">
-    <title>Data Warehouse - ABM Region</title>
+    <title>Data Warehouse - ABM Pais</title>
 </head>
 <body>
     <header>
@@ -17,12 +17,17 @@
             <a href="region.html" class="marcador">Región/Ciudad</a>
         </div>
     </header>
+    
     <section>
-        <h2>Agregar Region </h2>
+        <h2>Agregar Pais </h2>
         <form class="form" action="agregarCiudad">
+            <label for="regiones">Seleccione una Region:</label>
+            <select id="regiones" name="Regiones" onchange="cambioRegion();">
+              
+            </select>
             
-            <label for="cars">Agregue una Region:</label>
-            <input type="text" id="region" name="region"><br><br>
+            <label for="cars">Agrege un Pais:</label>
+            <input type="text" id="pais" name="pais" placeholder="escriba aqui"><br><br>
 
             <button>Agregar</button>
             <button>Volver Atrás</button>
@@ -30,15 +35,19 @@
     </section>
 
     <section>
-        <h2>Modificar Region </h2>
+        <h2>Modificar Pais </h2>
         <form class="form" action="agregarCiudad">
             <label for="regiones">Seleccione una Region:</label>
             <select id="regiones" name="Regiones" onchange="cambioRegion();">
               
             </select>
+            <label for="paises">Seleccione un País:</label>
+            <select id="paises" name="pais" onchange="cambioPais();">
+
+            </select>
             
-            <h5>Escriba el nuevo nombre de la region:</h5>
-            <input type="text" id="region" name="region"><br><br>
+            <h5>Escriba el nuevo nombre del nuevo Pais:</h5>
+            <input type="text" id="pais" name="pais" placeholder="escriba aqui"><br><br>
 
             <button>Modificar</button>
             <button>Volver Atrás</button>
@@ -46,17 +55,22 @@
     </section>
 
     <section>
-        <h2>Eliminar Region </h2>
+        <h2>Eliminar Ciudad </h2>
         <form class="form" action="agregarCiudad">
-            <label for="regiones">Seleccione una Region a eliminar:</label>
+            <label for="regiones">Seleccione una Region:</label>
             <select id="regiones" name="Regiones" onchange="cambioRegion();">
               
             </select>
-            
+            <label for="paises">Seleccione un País que desea eliminar:</label>
+            <select id="paises" name="pais" onchange="cambioPais();">
+
+            </select>
+
             <button>Eliminar</button>
             <button>Volver Atrás</button>,
         </form>
     </section>
     <script src="javascript/modificarRegiones.js" async></script>
+</body>
 </body>
 </html>

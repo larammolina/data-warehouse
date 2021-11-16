@@ -1,3 +1,8 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
 header{
     margin: 1 0px;
     display: flex;
@@ -12,6 +17,11 @@ header .menu_opciones{
     flex: row;
     justify-content: flex-end;
     background-color: #006241;
+}
+
+.marcador {
+    font-weight: bolder;
+    text-decoration: underline; 
 }
 
 header img {
@@ -40,19 +50,22 @@ a:hover{
     
 }
 
-.marcador {
-    font-weight: bolder;
-    text-decoration: underline; 
-}
-
-.flexar{
+.companias {
+    margin: 15px;
+    padding: 5px;
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.flexarRow{
-    display: flex;
-    justify-content: space-between;
     flex-direction: row;
+    justify-content: space-between;
+}
+
+.resultado {
+    border-radius: 25px;
+    padding: 15px;
+    border:#006241 solid 1px;
+}
+
+.resultado .titulos {
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px;
+    grid-template-rows: auto auto auto auto;
 }

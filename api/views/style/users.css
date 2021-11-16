@@ -26,6 +26,10 @@ a ::after{
     color: white;
 }
 
+a:hover{
+    font-weight: bolder;
+}
+
 header img {
     width: 55px;
     height: 55px;
@@ -58,12 +62,18 @@ form .form{
 }
 
 form input{
-    margin: 15px; 
-    border-radius: 25px;
+   margin: 15px; 
+    width: 250px;
+    height: auto;
     text-align: center;
     padding: 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: medium;
+}
+
+.marcador {
+    font-weight: bolder;
+    text-decoration: underline; 
 }
 
 .crear {

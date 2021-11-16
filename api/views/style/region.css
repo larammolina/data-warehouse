@@ -7,6 +7,11 @@ header{
     padding: 20px;
 }
 
+.marcador {
+    font-weight: bolder;
+    text-decoration: underline; 
+}
+
 header .menu_opciones{
     display: flex;
     flex: row;
@@ -33,9 +38,11 @@ a:hover{
 
 a ::after{
     color: white;
-
 }
 
+a:hover{
+    font-weight: bolder;
+}
 
 /* Remove default bullets */
 ul, #myUL {
@@ -114,7 +121,8 @@ form select {
 
 form input{
     margin: 15px; 
-    border-radius: 25px;
+    width: 250px;
+    height: auto;
     text-align: center;
     padding: 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
