@@ -22,3 +22,12 @@ Pasos a seguir para probar el trabajo pracito:
     2- Instalar Mongo DB
     3- Instalar Node js
     4- NPM
+    
+    
+--------------------------------------------------------------------------------------
+Coleccion en Postman de la API
+
+    https://go.postman.co/workspace/My-Workspace~ac648ce8-247a-458a-87cf-f79ab040b826/collection/13029550-be63d94e-c865-4bc7-8530-4e8a892ead65
+    
+--------------------------------------------------------------------------------------
+    
