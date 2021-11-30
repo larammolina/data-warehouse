@@ -1,3 +1,7 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 header{
     margin: 1 0px;
     display: flex;
@@ -22,6 +26,8 @@ header .menu_opciones{
 header img {
     width: 55px;
     height: 55px;
+    border: 2px solid #EEECE0;
+    border-radius: 35px;
 }
 
 a {
@@ -84,9 +90,9 @@ ul, #myUL {
     display: block;
 } 
 
-button{
+button, .button{
     margin: 10px;
-    background-color: #006241;
+    background-color: #aea985;
     margin: 15px; 
     border-radius: 25px;
     border-color: white;
@@ -127,4 +133,58 @@ form input{
     padding: 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: medium;
+}
+
+.title {
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif ;
+    color: #523629;
+    background-color: #EEECE0;
+    height: 50px;
+    padding: 25px;
+    margin: auto;
+}
+
+.back {
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.center {
+    margin: auto;
+    width: 80%;
+    padding: 10px;
+    text-align: center;   
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+.alto{
+    height: 500px;
+}
+
+footer{
+    padding: 10px;
+    padding-left: 50px;
+    background-color: #006241;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+a .menuAbajo {
+   
+    margin: 5px;
+    padding: 3px;
+    color: white;
+    text-decoration: none;
+
+}
+
+footer p {
+    color: lightgrey;
+    margin: 25px;
 }

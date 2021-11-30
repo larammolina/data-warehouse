@@ -1,3 +1,8 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
 header{
     margin: 1 0px;
     display: flex;
@@ -20,9 +25,10 @@ a {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: white;
     text-decoration: none;
+    color: white;
 }
 
-a ::after{
+a::after{
     color: white;
 }
 
@@ -33,11 +39,27 @@ a:hover{
 header img {
     width: 55px;
     height: 55px;
+    border: 2px solid #EEECE0;
+    border-radius: 35px;
 }
 
-.alta {
+button, .button{
+    margin: 10px;
+    background-color: #aea985;
+    margin: 15px; 
+    border-radius: 25px;
+    border-color: white;
+    text-align: center;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+    color: white;
+}
+
+.center {
     margin: auto;
     width: 80%;
+    height: 500px;
     padding: 10px;
     text-align: center;   
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -50,7 +72,6 @@ form{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
 }
 
 form .form{
@@ -80,3 +101,77 @@ form input{
     width: 150px;
 }
 
+.title {
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif ;
+    color: #523629;
+    background-color: #EEECE0;
+    height: 50px;
+    padding: 25px;
+    margin: auto;
+}
+
+.back {
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.resultado {
+    border-radius: 25px;
+    padding: 15px;
+    border:#006241 solid 3px;
+    width: 800px;
+}
+
+.resultado .titulos {
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px;
+    grid-template-rows: auto auto auto auto;
+}
+
+.resultadoApi{
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px;
+    grid-template-rows: auto auto auto auto;
+
+}
+
+.blanco{
+    height: 500px;
+}
+
+.center {
+    margin: auto;
+    height: auto;
+    width: 80%;
+    padding: 10px;
+    text-align: center;   
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+footer{
+    padding: 10px;
+    padding-left: 50px;
+    background-color: #006241;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+a .menuAbajo {
+   
+    margin: 5px;
+    padding: 3px;
+    color: white;
+    text-decoration: none;
+
+}
+
+footer p {
+    color: lightgrey;
+    margin: 25px;
+}

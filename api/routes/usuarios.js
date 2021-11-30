@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const app = express.Router();
 
+const { verifyJWT, isAdmin } = require("./middlewares.js")
+
 //variables de configuracion
 const config = require('./../config');
 const User = require("./../models/usuarios");
@@ -13,25 +15,7 @@ const User = require("./../models/usuarios");
 //AGREGAR MIDDLEWARE PARA VERIFICAR EL JWT
 //AGREGAR CODIGO PARA VERIFICAR JWT DEL ADMIN
 
-async function verifyJWT(req, res, next) {
-  const usertoken = req.headers['access-token'];
-  console.log("USERTKN " + usertoken);
-  if (usertoken != undefined) {
-    jwt.verify(usertoken, config.llave, function (err, decoded) {
-      if (err) {
-        console.log("JWT ERR " + err);
-        res.status('401').json('Error JWT')
-        //next();
-      } else {
-        console.log("JWT OK");
-        next();
-      }
-    });
 
-  } else {
-    res.status('401').json('Error no se envio JWT')
-  }
-}
 
 /**
  * @method - POST
@@ -56,6 +40,7 @@ app.post("/signup",
       username,
       email,
       password,
+      
       nombre,
       apellido
     } = req.body;
@@ -72,6 +57,7 @@ app.post("/signup",
         username,
         email,
         password,
+        
         nombre,
         apellido
       });
@@ -85,7 +71,62 @@ app.post("/signup",
 
     } catch (err) {
       console.log(err.message);
-      res.status(500).send("Error in Saving");
+      res.status(500).send("Error guardando usuario...");
+    }
+  }
+);
+
+//ESTE ES PARA QUE SOLO EL ADMIN PUEDA VER ESRE ENDPOINT
+app.post("/altaUsuario",
+  [
+    check("username", "Please Enter a Valid Username")
+      .not()
+      .isEmpty(),
+    check("email", "Please enter a valid email").isEmail(),
+  ],
+  verifyJWT, isAdmin, async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        errors: errors.array()
+      });
+    }
+    const {
+      username,
+      email,
+      password,
+      perfil,
+      nombre,
+      apellido
+    } = req.body;
+    console.log(req.body)
+    try {
+      let user = await User.findOne({ email });
+      if (user) {
+        return res.status(401).json({
+          msg: "User Already Exists"
+        });
+      }
+
+      user = new User({
+        username,
+        email,
+        password,
+        perfil,
+        nombre,
+        apellido
+      });
+      console.log(user)
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
+
+      await user.save();
+
+      res.status(200).send("Usuario creado con exito")
+
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send("Error guardando usuario...");
     }
   }
 );
@@ -120,15 +161,16 @@ app.post("/login",
         return res.status(400).json({
           message: "Incorrect Password !"
         });
-
+      
+        console.log(user.perfil)
       const payload = {
         user: {
-          id: user.id
+          id: user.id,
+          perfil: user.perfil
         }
       };
 
-      jwt.sign(payload, config.llave,
-        {
+      jwt.sign(payload, config.llave,{
           expiresIn: 3600
         },
         (err, token) => {

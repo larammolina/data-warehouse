@@ -1,31 +1,12 @@
 var express = require('express');
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const app = express.Router();
 const { consultarRegiones, actualizarRegion, crearRegion, eliminarRegion } = require('../db/regiones');
+const { verifyJWT, isAdmin } = require("./middlewares.js")
 
 //variables de configuracion
 const config = require('./../config');
 
-async function verifyJWT(req, res, next) {
-    const usertoken = req.headers['access-token'];
-    console.log("USERTKN " + usertoken);
-    if (usertoken != undefined) {
-        jwt.verify(usertoken, config.llave, function (err, decoded) {
-            if (err) {
-                console.log("JWT ERR " + err);
-                res.status('401').json('Error JWT')
-                //next();
-            } else {
-                console.log("JWT OK");
-                next();
-            }
-        });
-
-    } else {
-        res.status('401').json('Error no se envio JWT')
-    }
-}
 
 /** ----OK-----
  * @method - GET

@@ -1,31 +1,11 @@
 var express = require('express');
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const app = express.Router();
 const { actualizarCiudad, crearCiudad, eliminarCiudad } = require('../db/ciudades');
 
 //variables de configuracion
 const config = require('../config');
-
-async function verifyJWT(req, res, next) {
-    const usertoken = req.headers['access-token'];
-    console.log("USERTKN " + usertoken);
-    if (usertoken != undefined) {
-        jwt.verify(usertoken, config.llave, function (err, decoded) {
-            if (err) {
-                console.log("JWT ERR " + err);
-                res.status('401').json('Error JWT')
-                //next();
-            } else {
-                console.log("JWT OK");
-                next();
-            }
-        });
-
-    } else {
-        res.status('401').json('Error no se envio JWT')
-    }
-}
+const { verifyJWT, isAdmin } = require("./middlewares.js")
 
 /** ----OK----
  * @method - PUT
@@ -41,7 +21,7 @@ async function verifyJWT(req, res, next) {
             res.status(201).send({ msj: "Ciudad modificadad OK!" });
         }
     } catch (err) {
-        res.status(400).send({ msg: 'Error moficando ciudad: ' + err });
+        res.status(401).send({ msg: 'Error moficando ciudad: ' + err });
     }
 });
 
@@ -58,10 +38,10 @@ async function verifyJWT(req, res, next) {
         console.log("Pais -> " + ciudad + " -- "+ ID_CIUDAD);
         const ciudadCreada = await crearCiudad(ciudad, ID_CIUDAD);
         if (ciudadCreada) {
-            res.status(200).send({ id: ciudadCreada._id });
+            res.status(201).send({ id: ciudadCreada._id });
         }
     } catch (error) {
-        res.status(400).send({ error: "Error creando la ciudad....: " + error });
+        res.status(401).send({ error: "Error creando la ciudad....: " + error });
     }
 });
 
@@ -78,7 +58,7 @@ async function verifyJWT(req, res, next) {
             res.status(201).send({ id: ciudadEliminada._id });
         }
     } catch (error) {
-        res.status(400).send({ msg: 'Error eliminando ciduad: ' + error });
+        res.status(401).send({ msg: 'Error eliminando ciduad: ' + error });
     }
 });
 

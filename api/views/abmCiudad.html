@@ -18,74 +18,79 @@
             <a href="region.html" class="marcador">Región/Ciudad</a>
         </div>
     </header>
-    
-    <section>
+    <section class="title">
+        <h2>Ciudades</h2>
+      </section>
+    <section class="back">
+        <a class="button" href="/region.html">Volver Atrás</a>
+    </section>    
+    <section class="center">
         <h2>Agregar Ciudad </h2>
-        <form class="form" action="agregarCiudad">
+        <form class="form" >
             <label for="regiones">Seleccione una Region:</label>
-            <select id="regiones" name="Regiones" onchange="cambioRegion();">
+            <select id="regiones1" name="Regiones" onchange="cambioRegion1();">
               
             </select>
             <label for="paises">Seleccione un País:</label>
-            <select id="paises" name="pais" onchange="cambioPais();">
-
+            <select id="paises1" name="pais" >
             </select>
-            <label for="ciudades">Seleccione una Ciudad:</label>
-            <select id="ciudades" name="ciudad" >
-              
-            </select>
+          
             <label for="cars">Agrege una Ciudad:</label>
-            <input type="text" id="ciudad" name="ciudad"><br><br>
+            <input type="text" id="ciudad_agregar" name="ciudad"><br><br>
 
-            <button>Agregar</button>
-            <button>Volver Atrás</button>
+            <button class="button" onclick="agregarCiudad()">Agregar</button>  
         </form>
     </section>
 
-    <section>
+    <section class="center">
         <h2>Modificar Ciudad </h2>
-        <form class="form" action="agregarCiudad">
+        <form class="form">
             <label for="regiones">Seleccione una Region:</label>
-            <select id="regiones" name="Regiones" onchange="cambioRegion();">
+            <select id="regiones2" name="Regiones" onchange="cambioRegion2();">
               
             </select>
             <label for="paises">Seleccione un País:</label>
-            <select id="paises" name="pais" onchange="cambioPais();">
+            <select id="paises2" name="pais" onchange="cambioPais2();">
 
             </select>
             <label for="ciudades">Seleccione una Ciudad a modificar:</label>
-            <select id="ciudades" name="ciudad" >
+            <select id="ciudades2" name="ciudad" >
               
             </select>
             <h5>Escriba el nuevo nombre de la ciudad:</h5>
-            <input type="text" id="ciudad" name="ciudad"><br><br>
+            <input type="text" id="ciudad_nuevo" name="ciudad"><br><br>
 
-            <button>Modificar</button>
-            <button>Volver Atrás</button>
+            <button class="button" onclick="modificarCiudad()">Modificar</button>
         </form>
     </section>
 
-    <section>
+    <section class="center">
         <h2>Eliminar Ciudad </h2>
-        <form class="form" action="agregarCiudad">
+        <form class="form" >
             <label for="regiones">Seleccione una Region:</label>
-            <select id="regiones" name="Regiones" onchange="cambioRegion();">
+            <select id="regiones3" name="Regiones" onchange="cambioRegion3();"></select>
               
             </select>
             <label for="paises">Seleccione un País:</label>
-            <select id="paises" name="pais" onchange="cambioPais();">
+            <select id="paises3" name="pais" onchange="cambioPais3();">
 
             </select>
             <label for="ciudades">Seleccione una Ciudad a eliminar:</label>
-            <select id="ciudades" name="ciudad" >
+            <select id="ciudades3" name="ciudad" >
               
             </select>
-         
+            <button class="button" onclick="eliminarCiudad()">Eliminar</button>
 
-            <button>Eliminar</button>
-            <button>Volver Atrás</button>,
         </form>
     </section>
-    <script src="javascript/modificarRegiones.js" async></script>
+    <footer>
+        <a class="menuAbajo" href="contactos.html">Contactos</a>
+        <a class="menuAbajo" href="companias.html">Compañías</a>
+        <a class="menuAbajo" href="users.html">Usuarios</a>
+        <a class="menuAbajo" href="region.html">Región/Ciudad</a>
+
+        <p>Trabajo Practico Data Warehouse - Macarena Molina</p>
+    </footer>
+    <script src="javascript/modificarCiudad.js" async></script>
 </body>
 </html>

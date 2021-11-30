@@ -17,46 +17,59 @@
             <a href="region.html" class="marcador">Región/Ciudad</a>
         </div>
     </header>
-    <section>
-        <h2>Agregar Region </h2>
-        <form class="form" action="agregarCiudad">
+    <section class="title">
+        <h2>Regiones</h2>
+      </section>
+    <section class="back">
+        <a class="button" href="/region.html">Volver Atrás</a>
+    </section>
+    <section class="center">
+        <h2>Agregar Region</h2>
+        <form class="form">
             
-            <label for="cars">Agregue una Region:</label>
-            <input type="text" id="region" name="region"><br><br>
+            <label for="region">Agregue una Region:</label>
+            <input type="text" id="region1" name="region"><br><br>
 
-            <button>Agregar</button>
-            <button>Volver Atrás</button>
+            <button class="button" onclick="agregarRegion()">Crear</button>
         </form>
     </section>
 
-    <section>
-        <h2>Modificar Region </h2>
-        <form class="form" action="agregarCiudad">
+    <section class="center">
+        <h2>Modificar Region</h2>
+        <form class="form" >
             <label for="regiones">Seleccione una Region:</label>
-            <select id="regiones" name="Regiones" onchange="cambioRegion();">
+            <select id="regiones2" name="Regiones" >
               
             </select>
             
             <h5>Escriba el nuevo nombre de la region:</h5>
-            <input type="text" id="region" name="region"><br><br>
+            <input type="text" id="regionNueva" name="regionNueva"><br><br>
 
-            <button>Modificar</button>
-            <button>Volver Atrás</button>
+            <button class="button" onclick="modificarRegion()">Modificar</button>
+           
         </form>
     </section>
 
-    <section>
+    <section class="center">
         <h2>Eliminar Region </h2>
-        <form class="form" action="agregarCiudad">
+        <form class="form" >
             <label for="regiones">Seleccione una Region a eliminar:</label>
-            <select id="regiones" name="Regiones" onchange="cambioRegion();">
+            <select id="regiones3" name="Regiones" >
               
             </select>
             
-            <button>Eliminar</button>
-            <button>Volver Atrás</button>,
+            <button onclick='eliminarRegion()' class="button">Eliminar</button>
+            
         </form>
     </section>
+    <footer>
+        <a class="menuAbajo" href="contactos.html">Contactos</a>
+        <a class="menuAbajo" href="companias.html">Compañías</a>
+        <a class="menuAbajo" href="users.html">Usuarios</a>
+        <a class="menuAbajo" href="region.html">Región/Ciudad</a>
+
+        <p>Trabajo Practico Data Warehouse - Macarena Molina</p>
+    </footer>
     <script src="javascript/modificarRegiones.js" async></script>
 </body>
 </html>

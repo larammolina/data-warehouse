@@ -1,3 +1,7 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 header{
     margin: 1 0px;
     display: flex;
@@ -17,6 +21,20 @@ header .menu_opciones{
 header img {
     width: 55px;
     height: 55px;
+    border: 2px solid #EEECE0;
+    border-radius: 35px;
+}
+
+button, .button{
+    margin: 10px;
+    background-color: #aea985;
+    margin: 15px; 
+    border-radius: 25px;
+    border-color: white;
+    text-align: center;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
 }
 
 a {
@@ -55,4 +73,99 @@ a:hover{
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+}
+
+.title {
+    font-size: 25px !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    color: #523629;
+    background-color: #EEECE0;
+    height: 50px;
+    padding: 25px;
+    margin: auto;
+}
+
+form {
+    margin: 20px;
+}
+
+form .form, form label, form select{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 400px;
+    align-items: center;
+}
+
+form select {
+    border-radius: 25px;
+    margin: 5px;
+}
+
+form input{
+    margin: 5px; 
+    width: 250px;
+    height: auto;
+    text-align: center;
+    padding: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+.none{
+    border: none;
+}
+
+.borde{
+    border: solid #0a5703 2px;
+    border-radius: 25px;
+    width: auto;
+}
+
+i{
+    margin: 5px;
+}
+
+.back {
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.center {
+    margin: auto;
+    width: 80%;
+    padding: 10px;
+    text-align: center;   
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+.alto{
+    height: 500px;
+}
+
+footer{
+    padding: 10px;
+    padding-left: 50px;
+    background-color: #006241;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+a .menuAbajo {
+   
+    margin: 5px;
+    padding: 3px;
+    color: white;
+    text-decoration: none;
+
+}
+
+footer p {
+    color: lightgrey;
+    margin: 25px;
 }

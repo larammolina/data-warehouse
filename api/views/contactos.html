@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style/contactos.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <title>Data Warehouse - Contactos</title>
 </head>            
 <body>
@@ -17,33 +18,36 @@
             <a href="region.html">Región/Ciudad</a>
         </div>
     </header>
+    <section class="title">
+        <h2>Contactos</h2>
+    </section>
     <section class="flexar">
-        <div>Contactos</div>
         <div class="flexarRow">
             <div class="flexarRow">
-                <div class="buscador">
-                    <form action="search">
-                        <input type="text">
+                <div class="">
+                    <form action="" class="borde">
+                        <input class="none" type="text"><i class="fas fa-search"></i>
                     </form>
                 </div>
-                <div class="lupa">lupa</div>
             </div>
             <div class="flexarRow">
-                <div onclick="upload();" class="upload">Upload</div>
-                <div>Exportar contactos</div>
-                <button onclick="agregarContacto();"><a href="abmContacto.html">Agregar Contacto</a></button>
+                <button onclick=""><a href="abmContacto.html">Agregar/Modificar/Eliminar Contacto</a></button>
             </div>
         </div>
+    </section>
+    <section class="center alto">
         <div class="resultado">
-            <p>aca va el grid</p>
+            <p>aca va el resultado de la busqueda</p>
         </div>
     </section>
-    <section>
-        <!--traer de la api las companias!-->
-        <div>
+    <footer>
+        <a class="menuAbajo" href="contactos.html">Contactos</a>
+        <a class="menuAbajo" href="companias.html">Compañías</a>
+        <a class="menuAbajo" href="users.html">Usuarios</a>
+        <a class="menuAbajo" href="region.html">Región/Ciudad</a>
 
-        </div>
-    </section>
+        <p>Trabajo Practico Data Warehouse - Macarena Molina</p>
+    </footer>
     <script src="javascript/contactos.js" async></script> 
 </body>
 </html>

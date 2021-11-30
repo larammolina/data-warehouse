@@ -1,6 +1,5 @@
 *{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 header{
@@ -27,6 +26,8 @@ header .menu_opciones{
 header img {
     width: 55px;
     height: 55px;
+    border: 2px solid #EEECE0;
+    border-radius: 35px;
 }
 
 a {
@@ -50,6 +51,10 @@ a:hover{
     
 }
 
+.alto {
+    height: 500px;
+}
+
 .companias {
     margin: 15px;
     padding: 5px;
@@ -61,11 +66,109 @@ a:hover{
 .resultado {
     border-radius: 25px;
     padding: 15px;
-    border:#006241 solid 1px;
+    border:#006241 solid 3px;
+    width: 1100px;
 }
 
 .resultado .titulos {
     display: grid;
-    grid-template-columns: 200px 200px 200px 200px;
-    grid-template-rows: auto auto auto auto;
+    grid-template-columns: 200px 200px 200px 300px 200px;
+    grid-template-rows: auto auto auto auto auto;
+}
+
+button, .button{
+    margin: 10px;
+    background-color: #aea985;
+    margin: 15px; 
+    border-radius: 25px;
+    border-color: white;
+    text-align: center;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+.title {
+    font-size: 25px !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    color: #523629;
+    background-color: #EEECE0;
+    height: 50px;
+    padding: 25px;
+    margin: auto;
+}
+
+form {
+    margin: 20px;
+}
+
+form .form, .form label, .form select{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 400px;
+    align-items: center;
+    margin: auto;
+}
+
+form select {
+    border-radius: 25px;
+    margin: 10px;
+}
+
+form input, .form label{
+    
+    width: 250px;
+    height: auto;
+    text-align: center;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+.resultadoApi{
+    display: grid;
+    grid-template-columns: 200px 200px 200px 300px 200px;
+    grid-template-rows: auto auto auto auto auto;
+
+}
+
+.back {
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.center {
+    margin: auto;
+    width: 80%;
+    padding: 10px;
+    text-align: center;   
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+}
+
+footer{
+    padding: 10px;
+    padding-left: 50px;
+    background-color: #006241;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+a .menuAbajo {
+   
+    margin: 5px;
+    padding: 3px;
+    color: white;
+    text-decoration: none;
+
+}
+
+footer p {
+    color: lightgrey;
+    margin: 25px;
 }

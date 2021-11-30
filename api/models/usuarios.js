@@ -6,6 +6,15 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  perfil: {
+    type: String,
+    enum: {
+      values: ['admin', 'usuario'],
+      message: '{VALUE} el perfil es incorrecto'
+    },
+    default: "usuario",
+    required: true  //admin/usuario
+  },
   password: {
     type: String,
     required: true
