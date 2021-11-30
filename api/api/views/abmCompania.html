@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style/companias.css" type="text/css" rel="stylesheet">
+    <title>Data Warehouse - Companias</title>
+</head>            
+<body>
+    <header>
+        <img src="logo.png" alt="logo">
+        <div class="menu_opciones">
+            <a href="contactos.html" >Contactos</a>
+            <a href="companias.html" class="marcador">Compañías</a>
+            <a href="users.html" >Usuarios</a>
+            <a href="region.html" >Región/Ciudad</a>
+        </div>
+    </header>
+    <section class="title">
+        <h2>Compañias</h2>
+    </section>
+    <div class="back">
+        <button><a href="companias.html">Volver Atrás</a></button> 
+      </div>
+    </section>
+    <section class="center">
+        <h2>Agregar Compania</h2>
+        <form class="form">
+            
+            <label for="compania">Nombre:</label>
+            <input type="text" id="compania_agregar" name="compania"><br><br>
+            <label for="companiaDireccion">Direccion:</label>
+            <input type="text" id="compania_agregar_direccion" name="companiaDireccion"><br><br>
+            <label for="companiaEmail">Email:</label>
+            <input type="text" id="compania_agregar_email" name="companiaEmail"><br><br>
+            <label for="companiaTel">Telefono:</label>
+            <input type="text" id="compania_agregar_telefono" name="companiaTel"><br><br>
+
+            <label for="regiones">Seleccione una Región:</label>
+            <select id="regionesA" name="Regiones" onchange="cambioRegionA();">
+              
+            </select>
+            <label for="paises">Seleccione un País:</label>
+            <select id="paisesA" name="paises" onchange="cambioPaisA();">
+              
+            </select>
+            <label for="ciudades">Seleccione una Ciudad:</label>
+            <select id="ciudadesA" name="ciudades" >
+              
+            </select>
+
+            <button class="button" onclick="agregarCompania()">Crear</button>
+        </form>
+    </section>
+
+    <section class="center">
+        <h2>Modificar Compania</h2>
+        <form class="form" >
+            <label for="regiones">Seleccione una Compania:</label>
+            <select id="compania2" name="Regiones" >
+              
+            </select>
+            
+            <h5>Escriba el nuevo nombre de la compania:</h5>
+            <input type="text" id="companiaNueva" name="regionNueva"><br><br>
+
+            <button class="button" onclick='modificarCompania()'>Modificar</button>
+           
+        </form>
+    </section>
+
+    <section class="center">
+        <h2>Eliminar Compania </h2>
+        <form class="form" >
+            <label for="regiones">Seleccione una Compania a eliminar:</label>
+            <select id="compania3" name="Regiones" >
+              
+            </select>
+            
+            <button onclick='eliminarCompania()' class="button">Eliminar</button>
+            
+        </form>
+    </section>
+    <footer>
+        <a class="menuAbajo" href="contactos.html">Contactos</a>
+        <a class="menuAbajo" href="companias.html">Compañías</a>
+        <a class="menuAbajo" href="users.html">Usuarios</a>
+        <a class="menuAbajo" href="region.html">Región/Ciudad</a>
+
+        <p>Trabajo Practico Data Warehouse - Macarena Molina</p>
+    </footer>
+    <script src="javascript/modificarCompanias.js" async></script> 
+</body>
+</html>

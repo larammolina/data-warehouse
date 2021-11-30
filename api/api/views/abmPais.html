@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style/region.css" type="text/css" rel="stylesheet">
+    <title>Data Warehouse - ABM Pais</title>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="logo">
+        <div class="menu_opciones">
+            <a href="contactos.html">Contactos</a>
+            <a href="companias.html">Compañías</a>
+            <a href="users.html">Usuarios</a>
+            <a href="region.html" class="marcador">Región/Ciudad</a>
+        </div>
+    </header>
+    <section class="title">
+        <h2>Paises</h2>
+      </section>
+    <section class="back">
+        <a class="button" href="/region.html">Volver Atrás</a>
+    </section>
+    <section class="center">
+        <h2>Agregar Pais</h2>
+        <form class="form">
+            <label for="paises">Seleccione una Region:</label>
+            <select id="regiones1" name="Paises">
+              
+            </select>
+            
+            <label for="cars">Agrege un Pais:</label>
+            <input type="text" id="paises1" name="pais"><br><br>
+
+            <button class="button" onclick="agregarPais()">Crear</button>
+        </form>
+    </section>
+
+    <section class="center"> 
+        <h2>Modificar Pais</h2>
+        <form class="form">
+            <label for="regiones">Seleccione una Region:</label>
+            <select id="regiones2" name="Regiones" onchange="cambioRegion2();">
+              
+            </select>
+            <label for="paises">Seleccione un País:</label>
+            <select id="paises2" name="pais">
+
+            </select>
+            
+            <h5>Escriba el nuevo nombre del nuevo Pais:</h5>
+            <input type="text" id="pais_nuevo" name="pais"><br><br>
+
+            <button class="button" onclick="modificarPais()">Modificar</button>
+        </form>
+    </section>
+
+    <section class="center">
+        <h2>Eliminar Pais</h2>
+        <form class="form">
+            <label for="regiones">Seleccione una Region:</label>
+            <select id="regiones3" name="Regiones" onchange="cambioRegion3();">
+              
+            </select>
+            <label for="paises">Seleccione un País que desea eliminar:</label>
+            <select id="paises3" name="pais" >
+
+            </select>
+
+            <button class="button" onclick="eliminarPais()">Eliminar</button>
+        </form>
+    </section>
+    <footer>
+        <a class="menuAbajo" href="contactos.html">Contactos</a>
+        <a class="menuAbajo" href="companias.html">Compañías</a>
+        <a class="menuAbajo" href="users.html">Usuarios</a>
+        <a class="menuAbajo" href="region.html">Región/Ciudad</a>
+
+        <p>Trabajo Practico Data Warehouse - Macarena Molina</p>
+    </footer>
+    <script src="javascript/modificarPaises.js" async></script>
+</body>
+</body>
+</html>

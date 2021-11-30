@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style/companias.css" type="text/css" rel="stylesheet">
+    <title>Data Warehouse - Companias</title>
+</head>            
+<body>
+    <header>
+        <img src="logo.png" alt="logo">
+        <div class="menu_opciones">
+            <a href="contactos.html" >Contactos</a>
+            <a href="companias.html" class="marcador">Compañías</a>
+            <a href="users.html" >Usuarios</a>
+            <a href="region.html" >Región/Ciudad</a>
+        </div>
+    </header>
+    <section class="title">
+        <h2>Compañias</h2>
+    </section>
+    <div class="agregar">
+        <button><a href="abmCompania.html">Agregar/Modificar/Eliminar Companias</a></button> 
+      </div>
+    </section>
+    <section class="center alto">
+        <!--traer de la api las companias!-->
+        <div class="resultado">
+            <div class="titulos">
+                <h4>Nombre</h4>
+                <h4>Ciudad</h4>
+                <h4>Direccion</h4>
+                <h4>Email</h4>
+                <h4>Telefono</h4>
+            </div>
+            <div class="resultadoApi" id="resultadoApi">
+            </div>
+        </div>
+    </section>
+    <footer>
+        <a class="menuAbajo" href="contactos.html">Contactos</a>
+        <a class="menuAbajo" href="companias.html">Compañías</a>
+        <a class="menuAbajo" href="users.html">Usuarios</a>
+        <a class="menuAbajo" href="region.html">Región/Ciudad</a>
+
+        <p>Trabajo Practico Data Warehouse - Macarena Molina</p>
+    </footer>
+    <script src="javascript/companias.js" async></script> 
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style/contactos.css" type="text/css" rel="stylesheet">
+    <title>Data Warehouse - Nuevo Contacto</title>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="logo">
+        <div class="menu_opciones">
+            <a href="contactos.html" class="marcador">Contactos</a>
+            <a href="companias.html">Compañías</a>
+            <a href="users.html">Usuarios</a>
+            <a href="region.html">Región/Ciudad</a>
+        </div>
+    </header>
+    <section class="title">
+        <h2>Contactos</h2>
+    </section>
+    <section class="back">
+        <a class="button" href="/contactos.html">Volver Atrás</a>
+    </section>
+    <section class="form">
+        <h2>Nuevo Contacto</h2>
+        <form action="">
+            <div class="formImage">
+                <label for="image">Image:</label>
+            </div>
+            <div class="form">
+                <p>Nombre*</p>
+                <label for="nombre"></label>
+                <input type="text" id="nombre" required>
+            </div>
+            <div class="form">
+                <p>Apellido*</p>
+                <label for="apellido"></label>
+                <input type="text" id="apellido" required>
+            </div>
+            <div class="form">
+                <p>Cargo*</p>
+                <label for="cargo"></label>
+                <input type="text" id="cargo" required>
+            </div>
+            <div class="form">
+                <p>Email*</p>
+                <label for="email"></label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form">
+                <p>Companía*</p>
+                <label for="compania"></label>
+                <input type="text" id="compania" required>
+            </div>
+            <div class="form">
+                <p>Región</p>
+                <select id="regionesA" name="region">
+                    <option value="region">Volvo</option>
+                </select>
+            </div>
+            <div class="form">
+                <p>País</p>
+                <select id="paisesA" name="pais">
+                    <option value="pais">Volvo</option>
+                </select>
+            </div>
+            <div class="form">
+                <p>Ciudad</p>
+                <select id="ciudadesA" name="ciudad">
+                    <option value="ciudad">Volvo</option>
+                </select>
+            </div>
+            <div class="form">
+                <p>Dirección</p>
+                <label for="compania"></label>
+                <input type="text" id="compania" required>
+                
+            </div>
+            <div class="form">
+                <p>Canal de Contacto</p>
+                <label for="compania"></label>
+                <input type="text" id="compania" required>
+                
+            </div>
+            <div class="form">
+                <p>Cuenta de Usuario</p>
+                <label for="compania"></label>
+                <input type="text" id="compania" required>
+                
+
+            </div>
+            <div class="form">
+                <p>Preferencias</p>
+                <label for="compania"></label>
+                <input type="text" id="compania" required>
+               
+
+            </div>
+            <input class="crear button"  type="submit" value="crear" id="btn-crear" >
+        </form>
+    </section>
+    <footer>
+        <a class="menuAbajo" href="contactos.html">Contactos</a>
+        <a class="menuAbajo" href="companias.html">Compañías</a>
+        <a class="menuAbajo" href="users.html">Usuarios</a>
+        <a class="menuAbajo" href="region.html">Región/Ciudad</a>
+
+        <p>Trabajo Practico Data Warehouse - Macarena Molina</p>
+    </footer>
+    <script src="javascript/modificarContactos.js" async></script> 
+</body>
+</html>
