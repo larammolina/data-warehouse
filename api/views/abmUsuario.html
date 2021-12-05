@@ -48,8 +48,10 @@
             </div>
             <div class="form">
                 <p>Perfil</p>
-                <label for="perfil"></label>
-                <input type="text" id="perfil">
+                <select id="perfil" name="perfilUsuario" >
+                    <option value="usuario">Usuario</option>
+                    <option value="admin">Administrador</option>
+                </select>
             </div>
             <div class="form">
                 <p>Contraseña</p>
@@ -67,27 +69,41 @@
     <section class="center">
         <h2>Modificar Usuario</h2>
         <form class="form" >
-            <label for="regiones">Seleccione un usuario:</label>
-            <select id="compania2" name="Regiones" >
+            <label for="usuariosModificar">Seleccione un usuario:</label>
+            <select id="usuarios2" name="usuariosModificar" >
               
             </select>
             
-            <h5>Escriba el nuevo nombre del usuario:</h5>
-            <input type="text" id="companiaNueva" name="regionNueva"><br><br>
+            <div class="form">
+                <p>Nombre</p>
+                <label for="nombre2"></label>
+                <input type="text" id="nombre2">
+            </div>
+            <div class="form">
+                <p>Apellido</p>
+                <label for="apellido2"></label>
+                <input type="text" id="apellido2">
+            </div>
+            <div class="form">
+                <p>Email</p>
+                <label for="email2"></label>
+                <input type="email" id="email2">
+            </div>
 
-            <button class="button" onclick=''>Modificar</button>
+
+            <button class="button" onclick='modificarUsuario();'>Modificar</button>
            
         </form>
     </section>
     <section class="center">
         <h2>Eliminar Usuario </h2>
         <form class="form" >
-            <label for="regiones">Seleccione una Compania a eliminar:</label>
-            <select id="compania3" name="Regiones" >
+            <label for="usuarioEliminar">Seleccione un usuario a eliminar:</label>
+            <select id="usuarios3" name="usuarioEliminar" >
               
             </select>
             
-            <button onclick='' class="button">Eliminar</button>
+            <button onclick='eliminarUsuario();' class="button">Eliminar</button>
             
         </form>
     </section>

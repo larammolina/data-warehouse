@@ -21,23 +21,51 @@
     <section class="title">
         <h2>Contactos</h2>
     </section>
+    <section>
+        <div>
+            <button><a href="abmContacto.html">Agregar/Modificar/Eliminar Contacto</a></button>
+        </div>
+    </section>
     <section class="flexar">
         <div class="flexarRow">
             <div class="flexarRow">
                 <div class="">
+                    <h3>Buscar Por:</h3>
+
+                    <label for="campo">Campo</label>
+                    <select id="campo" name="campo" >
+                        <option value="nombre">Nombre</option>
+                        <option value="apellido">Apellido</option>
+                        <option value="cargo">Cargo</option>
+                        <option value="email">Email</option>
+                        <option value="compania">Companía</option>
+                        <option value="region">Región</option>
+                        <option value="pais">País</option>
+                        <option value="ciudad">Ciudad</option>
+                        <option value="direccion">Dirección</option>
+                        <option value="interes">Interés</option>
+                        <option value="canalDeContacto">Canal de Contacto</option>
+                        <option value="cuentaDeUsuario">Cuenta de Usuario</option>
+                        <option value="preferencias">Preferencias</option>
+                    </select>
+                    
+                    <label for="orden">Orden</label>
+                    <select id="orden" name="orden" >
+                        <option value="ascendente">Ascendente</option>
+                        <option value="descendente">Descendente</option>
+                    </select>
                     <form action="" class="borde">
-                        <input class="none" type="text"><i class="fas fa-search"></i>
+                        <input id="valor" type="text" ><i class="fas fa-search"></i>
                     </form>
+                    <button onclick="buscarContacto();">Buscar</button>
                 </div>
-            </div>
-            <div class="flexarRow">
-                <button onclick=""><a href="abmContacto.html">Agregar/Modificar/Eliminar Contacto</a></button>
             </div>
         </div>
     </section>
+    
     <section class="center alto">
-        <div class="resultado">
-            <p>aca va el resultado de la busqueda</p>
+        <div class="resultado" id="resultadoApi">
+            
         </div>
     </section>
     <footer>

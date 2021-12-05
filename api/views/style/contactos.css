@@ -53,6 +53,8 @@ a:hover{
     font-weight: bolder;
 }
 
+
+
 .contactos {
     display: flex;
     
@@ -133,9 +135,8 @@ i{
     justify-content: flex-end;
 }
 
-.center {
+.center, .center .form, .form label, .form label select{
     margin: auto;
-    width: 80%;
     padding: 10px;
     text-align: center;   
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -169,3 +170,4 @@ footer p {
     color: lightgrey;
     margin: 25px;
 }
+

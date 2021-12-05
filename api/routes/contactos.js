@@ -1,11 +1,12 @@
 var express = require('express');
 const bcrypt = require("bcryptjs");
 const app = express.Router();
-const { actualizarContacto, crearContactos, eliminarContacto, consultarContactos } = require('../db/contactos');
+const { actualizarContacto, crearContactos, eliminarContacto, consultarContactos, buscarContactos } = require('../db/contactos');
 
 //variables de configuracion
 const config = require('../config');
-const { verifyJWT, isAdmin } = require("./middlewares.js")
+const { verifyJWT, isAdmin } = require("./middlewares.js");
+const { serializeUser } = require('passport');
 
 /** ----OK----
  * @method - PUT
@@ -80,6 +81,22 @@ app.post("/agregarContacto", verifyJWT, async (req, res) => {
         }
     } catch (error) {
         res.status(400).send({ error: "Error creando el contacto....: " + error });
+    }
+});
+
+// Busqueda de contactos con odern
+app.get('/busqueda/:campo&:orden&:valor', async (req, res) => {
+    try {
+        let campo = req.params.campo;
+        let orden = req.params.orden;
+        let valor = req.params.valor;
+        console.log("Campo: "+campo + "Orden: "+orden + "Valor: "+valor)
+        const busquedaContactos = await buscarContactos(campo, orden, valor);
+        if (busquedaContactos) {
+            res.status(200).send({ resultado: busquedaContactos});
+        }
+    } catch (error) {
+        res.status(400).send("Error en la busqueda...");
     }
 });
 

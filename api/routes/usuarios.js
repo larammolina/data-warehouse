@@ -3,6 +3,7 @@ const { check, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const app = express.Router();
+const {consultarUsuarios, actualizarUsuarios, eliminarUsuario} = require("./../db/usuarios.js")
 
 const { verifyJWT, isAdmin } = require("./middlewares.js")
 
@@ -190,5 +191,62 @@ app.post("/login",
 );
 
 
+/** ----OK-----
+ * @method - GET
+ * @param - /contactos/consultaUsuarios
+ * @description - Consulta todos los Usuarios
+ */
+ app.get("/consultaUsuarios", verifyJWT, isAdmin, async (req, res) => {
+  try {
+      let usuarios = await consultarUsuarios();
+      if (usuarios) {
+          res.status(201).send({ datos: usuarios });
+      } else {
+          res.status(401).send({ msg: "Error al consultar usuarios" });
+      }
+  } catch(err) {
+      res.status(500)('Error al obtener usuarios');
+  }
+});
+
+/** ----OK-----
+ * @method - PUT
+ * @param - /contactos/actualizarUsuarios
+ * @description - Actualiza todos los Usuarios
+ */
+ app.put("/actualizarUsuarios/:_id", verifyJWT, isAdmin, async (req, res) => {
+  try {
+      let usuarioEditar = req.body;
+      let usuarioID = req.params;
+      let usuarioModif = await actualizarUsuarios(usuarioEditar, usuarioID);
+      if (usuarioModif) {
+          res.status(201).send({ datos: usuarioModif });
+      } else {
+          res.status(401).send({ msg: "Error al actualizar usuarios" });
+      }
+  } catch(err) {
+      res.status(500)('Error al obtener usuarios');
+  }
+});
+
+
+/** ----OK-----
+ * @method - DELETE
+ * @param - /contactos/eliminarContacto/
+ * @description - Elimina un contacto
+ */
+ app.delete("/eliminarUsuarios/:_id", verifyJWT, async (req, res) => {
+  let req_id = req.params;
+  try {
+      let usuarioEliminado = await eliminarUsuario(req_id);
+      if (usuarioEliminado) {
+          res.status(201).send({ datos: usuarioEliminado });
+      } else {
+          res.status(401).send({ msg: "Error al eliminar el contacto" });
+      }
+  } catch(err) {
+      res.status(500).send({ err: 'Error al eliminar el contacto.' });
+  }
+});
 
 module.exports = app;

@@ -23,12 +23,9 @@
     <section class="back">
         <a class="button" href="/contactos.html">Volver Atrás</a>
     </section>
-    <section class="form">
+    <section class="center">
         <h2>Nuevo Contacto</h2>
         <form action="">
-            <div class="formImage">
-                <label for="image">Image:</label>
-            </div>
             <div class="form">
                 <p>Nombre*</p>
                 <label for="nombre"></label>
@@ -51,25 +48,117 @@
             </div>
             <div class="form">
                 <p>Companía*</p>
-                <label for="compania"></label>
-                <input type="text" id="compania" required>
+                <select id="compania" name="companiaUsuario" required>
+
+                </select> 
             </div>
             <div class="form">
                 <p>Región</p>
-                <select id="regionesA" name="region">
-                    <option value="region">Volvo</option>
+                <select id="regiones1" name="region" onchange="cambioRegion1();">
+                    <option value="region" ></option>
                 </select>
             </div>
             <div class="form">
                 <p>País</p>
-                <select id="paisesA" name="pais">
-                    <option value="pais">Volvo</option>
+                <select id="paises1" name="pais" onchange="cambioPais1();">
+                    <option value="pais" ></option>
                 </select>
             </div>
             <div class="form">
                 <p>Ciudad</p>
-                <select id="ciudadesA" name="ciudad">
-                    <option value="ciudad">Volvo</option>
+                <select id="ciudades1" name="ciudad">
+                    <option value="ciudad"></option>
+                </select>
+            </div>
+            <div class="form">
+                <p>Dirección</p>
+                <label for="compania"></label>
+                <input type="text" id="direccion" required>
+                
+            </div>
+            <div class="form">
+                <p>Canal de Contacto</p>
+                <select id="canal" name="canalContacto" >
+                    <option value="telefono">Telefono</option>
+                    <option value="whatsapp">Whatsapp</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="linkedin">Linkedin</option>
+                </select>
+                
+            </div>
+            <div class="form">
+                <p>Cuenta de Usuario</p>
+                <label for="compania"></label>
+                <input type="text" id="cuenta" >
+                
+
+            </div>
+            <div class="form">
+                <p>Preferencias</p>
+                <select id="preferencias" name="preferencias" >
+                    <option value="sinPreferencias">Sin Preferencias</option>
+                    <option value="canalFavorito">Canal Favorito</option>
+                    <option value="noMolestar">No Molestar</option>
+                </select>
+               
+
+            </div>
+            <input class="crear button"  type="submit" value="crear" id="btn-crear" >
+        </form>
+    </section>
+    <section class="center">
+        <h2>Modificar Contacto</h2>
+        <form class="form" >
+            <div class="form">
+                <label for="contactosModificar">Seleccione un contacto a modificar:</label>
+                <select id="contactos2" name="contactosModificar" >
+                
+                </select>
+            </div>
+           
+            <div class="form">
+                <p>Nombre*</p>
+                <label for="nombre"></label>
+                <input type="text" id="nombre" required>
+            </div>
+            <div class="form">
+                <p>Apellido*</p>
+                <label for="apellido"></label>
+                <input type="text" id="apellido" required>
+            </div>
+            <div class="form">
+                <p>Cargo*</p>
+                <label for="cargo"></label>
+                <input type="text" id="cargo" required>
+            </div>
+            <div class="form">
+                <p>Email*</p>
+                <label for="email"></label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form">
+                <p>Companía*</p>
+                <select id="compania" name="companiaUsuario" required>
+
+                </select>
+            </div>
+            <div class="form">
+                <p>Región</p>
+                <select id="regiones2" name="region" onchange="cambioRegion2();">
+                    
+                </select>
+            </div>
+            <div class="form">
+                <p>País</p>
+                <select id="paises2" name="pais" onchange="cambioPais();">
+                    
+                </select>
+            </div>
+            <div class="form">
+                <p>Ciudad</p>
+                <select id="ciudades2" name="ciudad">
+                    
                 </select>
             </div>
             <div class="form">
@@ -80,25 +169,47 @@
             </div>
             <div class="form">
                 <p>Canal de Contacto</p>
-                <label for="compania"></label>
-                <input type="text" id="compania" required>
+                <select id="canal" name="canalContacto" >
+                    <option value="telefono">Telefono</option>
+                    <option value="whatsapp">Whatsapp</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="linkedin">Linkedin</option>
+                </select>
                 
             </div>
             <div class="form">
                 <p>Cuenta de Usuario</p>
                 <label for="compania"></label>
-                <input type="text" id="compania" required>
+                <input type="text" id="compania" >
                 
 
             </div>
             <div class="form">
                 <p>Preferencias</p>
-                <label for="compania"></label>
-                <input type="text" id="compania" required>
-               
-
+                <select id="preferencias" name="preferencias" >
+                    <option value="sinPreferencias">Sin Preferencias</option>
+                    <option value="canalFavorito">Canal Favorito</option>
+                    <option value="noMolestar">No Molestar</option>
+                </select>
             </div>
-            <input class="crear button"  type="submit" value="crear" id="btn-crear" >
+            
+
+            <button class="button" onclick='modificarContacto();'>Modificar</button>
+           
+        </form>
+    </section>
+    <section class="center">
+        <h2>Eliminar Contacto </h2>
+        <form class="form" >
+            <div class="form">
+                <label for="contactoEliminar">Seleccione un contacto a eliminar:</label>
+                <select id="contactos3" name="contactoEliminar" >
+                
+                </select>
+            </div>
+            <button onclick='eliminarContacto();' class="button">Eliminar</button>
+            
         </form>
     </section>
     <footer>

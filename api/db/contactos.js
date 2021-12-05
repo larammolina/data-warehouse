@@ -59,4 +59,19 @@ async function actualizarContacto(_contacto, id) {
     }
 };
 
-module.exports = { consultarContactos, crearContactos, eliminarContacto, actualizarContacto };
+async function buscarContactos(campo, orden, valor) {
+    try {
+        
+        let busqueda = await contactoSchema.find( { [campo]: { $regex: `${valor}` } } , {__v:0}).populate({
+            path: 'compania region pais ciudad',
+            strictPopulate: false,
+            select: 'nombre'
+        }
+        ).sort({[campo]: [orden]});
+        return busqueda;
+    } catch (error) {
+        console.log("Error buscando contactos... " + error.message);
+    }
+};
+
+module.exports = { consultarContactos, crearContactos, eliminarContacto, actualizarContacto, buscarContactos };
