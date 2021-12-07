@@ -31,8 +31,24 @@ function agregarUsuarioAlCombo(usuarios){
 
 }
 
+
+function validarPassword (){
+    pass1 = document.getElementById("password");
+    pass2 = document.getElementById("password2");
+
+    if (pass1.value=pass2.value) {
+        console.log("Las contraseñas deben ser iguales");
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 async function createUser(event) {
     event.preventDefault();
+
+    validarPassword();
     
     try {
         let user = {
@@ -40,14 +56,13 @@ async function createUser(event) {
             email: emailInput.value,
             password: passwordInput.value,
             nombre: nombreInput.value,
-            apellido: apellidoInput.value
-            
-            //perfil: perfilInput.value,
+            apellido: apellidoInput.value,
+            perfil: perfilInput.value
             
         };
         console.log(user);
         
-        let userCreate = await fetch(`${SERVER_URL}/user/signup`, {
+        let userCreate = await fetch(`${SERVER_URL}/user/altaUsuario`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -61,10 +76,7 @@ async function createUser(event) {
         let userCreated = await userCreate.json();
         
         console.log(userCreated);
-        if (userCreated) {
-            addUserContainer.style.display = 'none';
-            location.reload();
-        }
+
     } catch (error) {
         //errorMessages.textContent = error;
         console.log(error);

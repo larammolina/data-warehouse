@@ -16,6 +16,7 @@ const { serializeUser } = require('passport');
  app.put("/editarContacto/:_id", verifyJWT, async (req, res) => {
     try {
         let contactoModificar = req.body;
+        console.log(contactoModificar)
         const contactoID = req.params;
         const contactoModificado = await actualizarContacto(contactoModificar, contactoID);
         if (contactoModificado) {
@@ -73,6 +74,7 @@ app.delete("/eliminarContacto/:_id", verifyJWT, async (req, res) => {
 app.post("/agregarContacto", verifyJWT, async (req, res) => {
     try {
         const _contacto = req.body;
+        console.log(_contacto)
         const contactoreado = await crearContactos(_contacto);
         if (contactoreado) {
           res.status(200).send({ id: contactoreado._id });

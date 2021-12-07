@@ -47,6 +47,7 @@ async function eliminarContacto(id) {
 
 // Actualizar compania
 async function actualizarContacto(_contacto, id) {
+    console.log(_contacto)
     try {
         let contactoActualizado = await contactoSchema.updateOne(id, _contacto);
         //console.log("Compania actualz. "+regionActualizada)

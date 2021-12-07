@@ -42,7 +42,7 @@ const contactoSchema = new Schema({
     },
     interes: {
         type: Number,
-        required: true
+        required: false
     },
     canalDeContacto: [{
         type: Array,
