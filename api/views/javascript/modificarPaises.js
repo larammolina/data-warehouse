@@ -10,10 +10,21 @@ let selectBox_paises = document.getElementById("paises");
 let input_agregarPais = document.getElementById('paises1');
 let selectedValue_regiones, selectedValue_paises;
 
+verificarProfile();
 
-/*const createBtn = document.getElementById("bt_agregarReagion");
-let createRegionBTN = document.getElementById("region_name");
-createBtn.addEventListener('click', agregarRegion);*/
+async function verificarProfile() {
+    if (!token) {
+        localStorage.removeItem('token');
+        location.href = "/";
+    } else {
+        if (profile == "admin") {
+            console.log("Soy admin PERRI")
+        } else {
+            var element = document.getElementById("usuariosMenu");
+            element.classList.add("ocultar");
+        }
+    }
+}
 
 
 async function agregarPais(){
@@ -39,7 +50,7 @@ async function agregarPais(){
             let pais_agregada = await pais_region.json();
             if(pais_agregada.status == 401){  //es pq no estoy logueado o JWT vencido
                 console.log("Error 401 agregando region...")
-            }else if(pais_agregada.status == 201){
+            }else if(pais_agregada.status == 200){
                 console.log("Se Agrego OK!!")
             } else {
                 console.log("ERROR....");
@@ -71,7 +82,7 @@ async function cargarRegiones(){
             if(cargarRegion.status == 401){  //es pq no estoy logueado o JWT vencido
                 localStorage.removeItem('token');
                 location.href = "/";
-            }else if(cargarRegion.status == 201){
+            }else if(cargarRegion.status == 200){
                 if (region_cargada) {
                     
                     for(i in region_cargada.datos){
@@ -198,7 +209,7 @@ async function modificarPais(){
         let pais_editada = await editar_pais.json();
         if(pais_editada.status == 401){  //es pq no estoy logueado o JWT vencido
             console.log("Error 401 agregando pais...")
-        }else if(pais_editada.status == 201){
+        }else if(pais_editada.status == 200){
             console.log("Se Agrego OK!!")
         } else {
             console.log("ERROR....");
@@ -227,7 +238,7 @@ async function eliminarPais(){
         let pais_eliminada = await eliminar_pais.json();
         if(pais_eliminada.status == 401){  //es pq no estoy logueado o JWT vencido
             console.log("Error 401 eliminando region...")
-        }else if(pais_eliminada.status == 201){
+        }else if(pais_eliminada.status == 200){
             console.log("Se elimino OK!!")
         } else {
             console.log("ERROR....");

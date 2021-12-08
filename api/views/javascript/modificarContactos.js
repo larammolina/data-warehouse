@@ -35,6 +35,21 @@ let contactos = []
 // Create contact listener
 createBtn.addEventListener('click', crearContacto);
 
+async function verificarProfile() {
+    if (!token) {
+        localStorage.removeItem('token');
+        location.href = "/";
+    } else {
+        if (profile == "admin") {
+            console.log("Soy admin PERRI")
+        } else {
+            var element = document.getElementById("usuariosMenu");
+            element.classList.add("ocultar");
+        }
+    }
+}
+
+
 
 async function crearContacto(){
     try {
@@ -114,7 +129,7 @@ async function cargarCompanias() {
             if(cargarCompanias.status == 401){  //es pq no estoy logueado o JWT vencido
                 localStorage.removeItem('token');
                 location.href = "/";
-            }else if(cargarCompanias.status == 201){
+            }else if(cargarCompanias.status == 200){
                 if (companias_cargadas) {
                     for(i in companias_cargadas.datos){
                         //imprimo las regiones por pantalla
@@ -156,7 +171,7 @@ async function cargarContacto() {
             if(contactos.status == 401){  //es pq no estoy logueado o JWT vencido
                 localStorage.removeItem('token');
                 location.href = "/";
-            }else if(contactos.status == 201){
+            }else if(contactos.status == 200){
                 if (contactos_cargados) {
                     let aux = []
                     for(i in contactos_cargados.datos){
@@ -191,32 +206,36 @@ function agregarContactoAlCombo(contactos){
 
 
 async function eliminarContacto(){
+    var result = confirm("Want to delete?");
+    if (result) {
+        //Logic to delete the item
+        let seleccionada = document.getElementById("contactosE3");
+        seleccionada = seleccionada.options[seleccionada.selectedIndex].value;
+        console.log('contacto seleccionada: ' + seleccionada);
 
-    let seleccionada = document.getElementById("contactosE3");
-    seleccionada = seleccionada.options[seleccionada.selectedIndex].value;
-    console.log('contacto seleccionada: ' + seleccionada);
-
-    try {
-        let eliminar = await fetch(`${SERVER_URL}/contactos/eliminarContacto/${seleccionada}`, {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json', 
-                "access-token": `${token}`
-            },
-            //body: JSON.stringify(region)
-        });
-        let eliminada = await eliminar.json();
-        if(eliminada.status == 401){  //es pq no estoy logueado o JWT vencido
-            console.log("Error 401 eliminando contacto...")
-        }else if(eliminada.status == 201){
-            console.log("Se elimino OK!!")
-        } else {
-            console.log("ERROR....");
+        try {
+            let eliminar = await fetch(`${SERVER_URL}/contactos/eliminarContacto/${seleccionada}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json', 
+                    "access-token": `${token}`
+                },
+                //body: JSON.stringify(region)
+            });
+            let eliminada = await eliminar.json();
+            if(eliminada.status == 401){  //es pq no estoy logueado o JWT vencido
+                console.log("Error 401 eliminando contacto...")
+            }else if(eliminada.status == 200){
+                console.log("Se elimino OK!!")
+            } else {
+                console.log("ERROR....");
+            }
+        } catch (error) {
+            console.log(error);
         }
-    } catch (error) {
-        console.log(error);
     }
+    
 }
 
 async function cargarRegiones(){ 
@@ -238,7 +257,7 @@ async function cargarRegiones(){
             if(cargarRegion.status == 401){  //es pq no estoy logueado o JWT vencido
                 localStorage.removeItem('token');
                 location.href = "/";
-            }else if(cargarRegion.status == 201){
+            }else if(cargarRegion.status == 200){
                 if (region_cargada) {
                     
                     for(i in region_cargada.datos){
@@ -385,6 +404,13 @@ async function modificarContactos(){
             nombre: nombreInput2.value,
             apellido: apellidoInput2.value,
             cargo: cargoInput2.value,
+            email: emailInput2.value
+        }
+        /*
+        let contacto = {
+            nombre: nombreInput2.value,
+            apellido: apellidoInput2.value,
+            cargo: cargoInput2.value,
             email: emailInput2.value,
             compania: companiaInput2.options[companiaInput2.selectedIndex].value,
             region: regionInput2.options[regionInput2.selectedIndex].value,
@@ -398,6 +424,16 @@ async function modificarContactos(){
             }
             
         };
+        */
+
+        if( companiaInput2.options[companiaInput2.selectedIndex].value )  Object.assign(contacto, {compania: companiaInput2.options[companiaInput2.selectedIndex].value})
+        //if( regionInput2.options[regionInput2.selectedIndex].value ) contacto.push({region: regionInput2.options[regionInput2.selectedIndex].value});
+        //if( paisInput2.options[paisInput2.selectedIndex].value ) contacto.push({pais: paisInput2.options[paisInput2.selectedIndex].value});
+        //if( ciudadInput2.options[ciudadInput2.selectedIndex].value ) contacto.push({ciudad: ciudadInput2.options[ciudadInput2.selectedIndex].value});
+        //if( direccionInput2.value ) contacto.push({direccion: direccionInput2.value});
+        //if( canalInput2.options[canalInput2.selectedIndex].value && cuentaInput2.value && prefsInput2.options[prefsInput2.selectedIndex].value ) contacto.push({canalDeContacto: { canal: canalInput2.options[canalInput2.selectedIndex].value, cuentaDeUsuario: cuentaInput2.value, preferencias: prefsInput2.options[prefsInput2.selectedIndex].value }});
+
+        
         console.log(contacto);
 
         let seleccionada = document.getElementById("contactosM2");
@@ -419,7 +455,7 @@ async function modificarContactos(){
         if(contactoModificado.status == 401){  //es pq no estoy logueado o JWT vencido
             localStorage.removeItem('token');
             location.href = "/";
-        }else if(contactoModificado.status == 201){
+        }else if(contactoModificado.status == 200){
             console.log(contactoModificado);
         } else {
             console.log("ERROR....");

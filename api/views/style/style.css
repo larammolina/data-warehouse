@@ -3,6 +3,12 @@ header{
     background-color: #006241;
 }
 
+
+.ocultar{
+    display: none;
+}
+
+
 header .menu_opciones{
     display: none;
 }

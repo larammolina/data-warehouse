@@ -18,7 +18,7 @@ const { verifyJWT, isAdmin } = require("./middlewares.js")
         const ciudadID = req.params;
         const ciudadMOdif = await actualizarCiudad(ciudadModificar, ciudadID);
         if (ciudadMOdif) {
-            res.status(201).send({ msj: "Ciudad modificadad OK!" });
+            res.status(200).send({ msj: "Ciudad modificadad OK!" });
         }
     } catch (err) {
         res.status(401).send({ msg: 'Error moficando ciudad: ' + err });
@@ -38,7 +38,7 @@ const { verifyJWT, isAdmin } = require("./middlewares.js")
         console.log("Pais -> " + ciudad + " -- "+ ID_CIUDAD);
         const ciudadCreada = await crearCiudad(ciudad, ID_CIUDAD);
         if (ciudadCreada) {
-            res.status(201).send({ id: ciudadCreada._id });
+            res.status(200).send({ id: ciudadCreada._id });
         }
     } catch (error) {
         res.status(401).send({ error: "Error creando la ciudad....: " + error });
@@ -55,7 +55,7 @@ const { verifyJWT, isAdmin } = require("./middlewares.js")
         let ciudadID = req.params;
         let ciudadEliminada = await eliminarCiudad(ciudadID);
         if (ciudadEliminada) {
-            res.status(201).send({ id: ciudadEliminada._id });
+            res.status(200).send({ id: ciudadEliminada._id });
         }
     } catch (error) {
         res.status(401).send({ msg: 'Error eliminando ciduad: ' + error });

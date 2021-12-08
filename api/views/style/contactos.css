@@ -11,6 +11,12 @@ header{
     padding: 20px;
 }
 
+.ocultar{
+    display: none;
+}
+
+
+
 header .menu_opciones{
     display: flex;
     flex: row;

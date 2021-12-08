@@ -20,6 +20,20 @@ cargarCompanias();
 //cargo regiones al inicio
 cargarRegiones();
 
+async function verificarProfile() {
+    if (!token) {
+        localStorage.removeItem('token');
+        location.href = "/";
+    } else {
+        if (profile == "admin") {
+            console.log("Soy admin PERRI")
+        } else {
+            var element = document.getElementById("usuariosMenu");
+            element.classList.add("ocultar");
+        }
+    }
+}
+
 async function cargarCompanias() {
     if(!token){
         localStorage.removeItem('token');
@@ -39,7 +53,7 @@ async function cargarCompanias() {
             if(cargarCompanias.status == 401){  //es pq no estoy logueado o JWT vencido
                 localStorage.removeItem('token');
                 location.href = "/";
-            }else if(cargarCompanias.status == 201){
+            }else if(cargarCompanias.status == 200){
                 if (companias_cargadas) {
                     /*for(i in companias_cargadas.datos){
                         console.log("Compania: " + companias_cargadas.datos[i].nombre + " " + companias_cargadas.datos[i].direccion + " " +companias_cargadas.datos[i].email + " " +companias_cargadas.datos[i].telefono + companias_cargadas.datos[i].ciudad);
@@ -104,7 +118,7 @@ async function modificarCompania(){
         let compania_editada = await editar_compania.json();
         if(compania_editada.status == 401){  //es pq no estoy logueado o JWT vencido
             console.log("Error 401 agregando region...")
-        }else if(compania_editada.status == 201){
+        }else if(compania_editada.status == 200){
             console.log("Se Agrego OK!!")
         } else {
             console.log("ERROR....");
@@ -133,7 +147,7 @@ async function eliminarCompania(){
         let compania_eliminada = await eliminar_compania.json();
         if(compania_eliminada.status == 401){  //es pq no estoy logueado o JWT vencido
             console.log("Error 401 eliminando region...")
-        }else if(compania_eliminada.status == 201){
+        }else if(compania_eliminada.status == 200){
             console.log("Se elimino OK!!")
         } else {
             console.log("ERROR....");
@@ -172,7 +186,7 @@ async function agregarCompania(){
             let compania_agregada = await agregar_compania.json();
             if(compania_agregada.status == 401){  //es pq no estoy logueado o JWT vencido
                 console.log("Error 401 agregando region...")
-            }else if(compania_agregada.status == 201){
+            }else if(compania_agregada.status == 200){
                 console.log("Se Agrego OK!!")
             } else {
                 console.log("ERROR....");
@@ -204,7 +218,7 @@ async function cargarRegiones(){
             if(cargarRegion.status == 401){  //es pq no estoy logueado o JWT vencido
                 localStorage.removeItem('token');
                 location.href = "/";
-            }else if(cargarRegion.status == 201){
+            }else if(cargarRegion.status == 200){
                 if (region_cargada) {
                     
                     for(i in region_cargada.datos){

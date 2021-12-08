@@ -9,6 +9,22 @@ var i;
 
 consultarRegiones();
 
+verificarProfile();
+
+async function verificarProfile() {
+    if (!token) {
+        localStorage.removeItem('token');
+        location.href = "/";
+    } else {
+        if (profile == "admin") {
+            console.log("Soy admin PERRI")
+        } else {
+            var element = document.getElementById("usuariosMenu");
+            element.classList.add("ocultar");
+        }
+    }
+}
+
 for (i = 0; i < toggler.length; i++) {
     toggler[i].addEventListener("click", function () {
         this.parentElement.querySelector(".nested").classList.toggle("active");

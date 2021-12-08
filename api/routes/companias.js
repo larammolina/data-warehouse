@@ -16,7 +16,7 @@ app.get("/consultaCompanias", verifyJWT, async (req, res) => {
     try {
         let companias = await consultarCompania();
         if (companias) {
-            res.status(201).send({ datos: companias });
+            res.status(200).send({ datos: companias });
         } else {
             res.status(401).send({ msg: "Error al consultar companias" });
         }
@@ -36,7 +36,7 @@ app.delete("/eliminarCompania/:_id", verifyJWT, async (req, res) => {
     try {
         let regionesEliminadas = await eliminarCompania(req_id);
         if (regionesEliminadas) {
-            res.status(201).send({ datos: regionesEliminadas });
+            res.status(200).send({ datos: regionesEliminadas });
         } else {
             res.status(401).send({ msg: "Error al eliminar la compania" });
         }
@@ -78,7 +78,7 @@ app.post("/agregarCompanias", verifyJWT, async (req, res) => {
         let companiaID = req.params;
         let companiaModificada = await actualizarCompania(companiaEditar, companiaID);
         //console.log(regionModificada)
-        res.status(201).send({ msg: "Compania Actualizada OK!" });
+        res.status(200).send({ msg: "Compania Actualizada OK!" });
     } catch (err) {
         res.status(400).send({ msg: 'Error actualizando la compania: ' + err });
     }

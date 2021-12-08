@@ -20,7 +20,7 @@ const { serializeUser } = require('passport');
         const contactoID = req.params;
         const contactoModificado = await actualizarContacto(contactoModificar, contactoID);
         if (contactoModificado) {
-            res.status(201).send({ msj: "Contacto modificadad OK!" });
+            res.status(200).send({ msj: "Contacto modificadad OK!" });
         }
     } catch (err) {
         res.status(400).send({ msg: 'Error moficando contacto: ' + err });
@@ -37,7 +37,7 @@ const { serializeUser } = require('passport');
     try {
         let contactos = await consultarContactos();
         if (contactos) {
-            res.status(201).send({ datos: contactos });
+            res.status(200).send({ datos: contactos });
         } else {
             res.status(401).send({ msg: "Error al consultar contactos" });
         }
@@ -56,7 +56,7 @@ app.delete("/eliminarContacto/:_id", verifyJWT, async (req, res) => {
     try {
         let contactoEliminado = await eliminarContacto(req_id);
         if (contactoEliminado) {
-            res.status(201).send({ datos: contactoEliminado });
+            res.status(200).send({ datos: contactoEliminado });
         } else {
             res.status(401).send({ msg: "Error al eliminar el contacto" });
         }
@@ -79,10 +79,10 @@ app.post("/agregarContacto", verifyJWT, async (req, res) => {
         if (contactoreado) {
           res.status(200).send({ id: contactoreado._id });
         }else{
-            res.status(400).send({ error: "Error creando el contacto"});
+            res.status(401).send({ error: "Error creando el contacto"});
         }
     } catch (error) {
-        res.status(400).send({ error: "Error creando el contacto....: " + error });
+        res.status(401).send({ error: "Error creando el contacto....: " + error });
     }
 });
 
@@ -98,7 +98,7 @@ app.get('/busqueda/:campo&:orden&:valor', async (req, res) => {
             res.status(200).send({ resultado: busquedaContactos});
         }
     } catch (error) {
-        res.status(400).send("Error en la busqueda...");
+        res.status(401).send("Error en la busqueda...");
     }
 });
 

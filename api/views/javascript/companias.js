@@ -7,6 +7,22 @@ var i;
 
 cargarCompanias();
 
+verificarProfile();
+
+async function verificarProfile() {
+    if (!token) {
+        localStorage.removeItem('token');
+        location.href = "/";
+    } else {
+        if (profile == "admin") {
+            console.log("Soy admin PERRI")
+        } else {
+            var element = document.getElementById("usuariosMenu");
+            element.classList.add("ocultar");
+        }
+    }
+}
+
 async function cargarCompanias() {
     if(!token){
         localStorage.removeItem('token');
@@ -26,7 +42,7 @@ async function cargarCompanias() {
             if(cargarCompanias.status == 401){  //es pq no estoy logueado o JWT vencido
                 localStorage.removeItem('token');
                 location.href = "/";
-            }else if(cargarCompanias.status == 201){
+            }else if(cargarCompanias.status == 200){
                 if (companias_cargadas) {
                     for(i in companias_cargadas.datos){
                         console.log("Compania: " + companias_cargadas.datos[i].nombre + " " + companias_cargadas.datos[i].direccion + " " +companias_cargadas.datos[i].email + " " +companias_cargadas.datos[i].telefono + companias_cargadas.datos[i].ciudad);
@@ -98,7 +114,7 @@ async function modificarCompania(){
         let region_editada = await editar_region.json();
         if(region_editada.status == 401){  //es pq no estoy logueado o JWT vencido
             console.log("Error 401 agregando region...")
-        }else if(region_editada.status == 201){
+        }else if(region_editada.status == 200){
             console.log("Se Agrego OK!!")
         } else {
             console.log("ERROR....");
@@ -127,7 +143,7 @@ async function eliminarCompania(){
         let region_eliminada = await eliminar_region.json();
         if(region_eliminada.status == 401){  //es pq no estoy logueado o JWT vencido
             console.log("Error 401 eliminando region...")
-        }else if(region_eliminada.status == 201){
+        }else if(region_eliminada.status == 200){
             console.log("Se elimino OK!!")
         } else {
             console.log("ERROR....");

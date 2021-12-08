@@ -18,7 +18,7 @@ const { verifyJWT, isAdmin } = require("./middlewares.js")
         let paisID = req.params;
         const paisModif= await actualizarPais(paisModificar, paisID);
         if (paisModif) {
-            res.status(201).send({ msj: "Pais Modificado OK" });
+            res.status(200).send({ msj: "Pais Modificado OK" });
         }
     } catch (err) {
         res.status(400).send({ msg: 'Error modificando el pais...: ' + err });
@@ -54,7 +54,7 @@ const { verifyJWT, isAdmin } = require("./middlewares.js")
         let paisID = req.params;
         let paisElimidado = await eliminarPais(paisID);
         if (paisElimidado) {
-            res.status(201).send({ id: paisElimidado._id });
+            res.status(200).send({ id: paisElimidado._id });
         }
     } catch (err) {
         res.status(400).send({ msg: 'Error eliminando pais... ' + err });

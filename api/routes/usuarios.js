@@ -23,7 +23,7 @@ const User = require("./../models/usuarios");
  * @param - /signup
  * @description - User SignUp
  */
-app.post("/signup",
+/*app.post("/signup",
   [
     check("username", "Please Enter a Valid Username")
       .not()
@@ -75,7 +75,7 @@ app.post("/signup",
       res.status(500).send("Error guardando usuario...");
     }
   }
-);
+);*/
 
 //ESTE ES PARA QUE SOLO EL ADMIN PUEDA VER ESRE ENDPOINT
 app.post("/altaUsuario",
@@ -88,7 +88,7 @@ app.post("/altaUsuario",
   verifyJWT, isAdmin, async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({
+      return res.status(401).json({
         errors: errors.array()
       });
     }
@@ -100,11 +100,12 @@ app.post("/altaUsuario",
       nombre,
       apellido
     } = req.body;
-    console.log(req.body)
+    console.log("BODY: "+req.body)
     try {
       let user = await User.findOne({ email });
       if (user) {
-        return res.status(401).json({
+        console.log("User Already Exists")
+        return res.status(402).json({
           msg: "User Already Exists"
         });
       }
@@ -122,12 +123,12 @@ app.post("/altaUsuario",
       user.password = await bcrypt.hash(password, salt);
 
       await user.save();
-
-      res.status(200).send("Usuario creado con exito")
+      console.log("Usuario creado OK!")
+      res.status(200).send({mensaje: "Usuario creado con exito"})
 
     } catch (err) {
       console.log(err.message);
-      res.status(500).send("Error guardando usuario...");
+      res.status(500).send({mensaje: "Error guardando usuario..."});
     }
   }
 );
@@ -145,7 +146,7 @@ app.post("/login",
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({
+      return res.status(1).json({
         errors: errors.array()
       });
     }
@@ -154,12 +155,12 @@ app.post("/login",
     try {
       let user = await User.findOne({ username });
       if (!user)
-        return res.status(400).json({
+        return res.status(401).json({
           message: "User Not Exist"
         });
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch)
-        return res.status(400).json({
+        return res.status(401).json({
           message: "Incorrect Password !"
         });
       
@@ -171,16 +172,35 @@ app.post("/login",
         }
       };
 
-      jwt.sign(payload, config.llave,{
+      let perf = user.perfil;
+
+      /*
+      jwt.sign(payload,  config.llave,{
           expiresIn: 3600
         },
         (err, token) => {
           if (err) throw err;
-          res.status(200).json({
+          let res = {
+            token,
+            payload.perfil
+          }
+          res.status(200).send({
             token
+            
           });
         }
       );
+*/
+        let token = jwt.sign(payload,  config.llave,{
+          expiresIn: 3600
+        });
+
+        res.status(200).send({
+          perf,
+          token
+          
+        })
+
     } catch (e) {
       console.error(e);
       res.status(500).json({
@@ -200,7 +220,7 @@ app.post("/login",
   try {
       let usuarios = await consultarUsuarios();
       if (usuarios) {
-          res.status(201).send({ datos: usuarios });
+          res.status(200).send({ datos: usuarios });
       } else {
           res.status(401).send({ msg: "Error al consultar usuarios" });
       }
@@ -220,7 +240,7 @@ app.post("/login",
       let usuarioID = req.params;
       let usuarioModif = await actualizarUsuarios(usuarioEditar, usuarioID);
       if (usuarioModif) {
-          res.status(201).send({ datos: usuarioModif });
+          res.status(200).send({ datos: usuarioModif });
       } else {
           res.status(401).send({ msg: "Error al actualizar usuarios" });
       }
@@ -235,12 +255,12 @@ app.post("/login",
  * @param - /contactos/eliminarContacto/
  * @description - Elimina un contacto
  */
- app.delete("/eliminarUsuarios/:_id", verifyJWT, async (req, res) => {
+ app.delete("/eliminarUsuarios/:_id", verifyJWT, isAdmin, async (req, res) => {
   let req_id = req.params;
   try {
       let usuarioEliminado = await eliminarUsuario(req_id);
       if (usuarioEliminado) {
-          res.status(201).send({ datos: usuarioEliminado });
+          res.status(200).send({ datos: usuarioEliminado });
       } else {
           res.status(401).send({ msg: "Error al eliminar el contacto" });
       }

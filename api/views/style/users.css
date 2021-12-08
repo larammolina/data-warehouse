@@ -2,6 +2,9 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.ocultar{
+    display: none;
+}
 
 header{
     margin: 1 0px;

@@ -1,7 +1,6 @@
 const usernameInput = document.getElementById("usuario");
 const passwordInput = document.getElementById("password");
 const loginBtn = document.getElementById("btn-ingresar");
-//const notification = document.getElementById("notification");
 let loginHeaders = new Headers();
 loginHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
@@ -27,14 +26,14 @@ loginBtn.addEventListener("click", (event) => {
             if (response.status == 200) {
                 response.json().then((result) => {
                     let token = result.token;
-                    //let profile = result.profile;
+                    let profile = result.perf;
 
                     if (token !== undefined) {
                         console.log(" Token: " + token);
                         sessionStorage.setItem("token", JSON.stringify(token));
                         localStorage.setItem("token", JSON.stringify(token));
-                        //sessionStorage.setItem("profile", JSON.stringify(profile));
-                        //localStorage.setItem("profile", JSON.stringify(profile));
+                        sessionStorage.setItem("profile", JSON.stringify(profile));
+                        localStorage.setItem("profile", JSON.stringify(profile));
                         location.href = "users.html";
                     } else {
                         notification.innerHTML = "Email or password is not valid!";
@@ -43,7 +42,7 @@ loginBtn.addEventListener("click", (event) => {
                     }
                 });
             } else {
-                notification.innerHTML = "Email or password is not valid!";
+                //notification.innerHTML = "Email or password is not valid!";
                 console.log("Error: " + response.json());
                 usernameInput.value = '';
                 passwordInput.value = '';

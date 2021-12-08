@@ -10,11 +10,24 @@ const createBtn = document.getElementById("btn-crear");
 const token = JSON.parse(localStorage.getItem('token'));
 const profile = JSON.parse(localStorage.getItem('profile'));
 
-let loginHeaders = new Headers();
-loginHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
 let usuarios = [];
 const SERVER_URL = "http://localhost:3022";
+
+verificarProfile();
+
+async function verificarProfile(){
+    if(!token){
+        localStorage.removeItem('token');
+        location.href = "/";
+    }else{
+        if(profile == "admin"){
+            console.log("Soy admin")
+        }else{
+            var element = document.getElementById("usuariosMenu");
+            element.classList.add("ocultar");
+        }
+    }
+}
 
 //listeners
 // Create User listener
@@ -36,53 +49,72 @@ function validarPassword (){
     pass1 = document.getElementById("password");
     pass2 = document.getElementById("password2");
 
-    if (pass1.value=pass2.value) {
+    if (pass1.value != pass2.value) {
         console.log("Las contraseñas deben ser iguales");
-        return true;
-    } else {
         return false;
+    } else {
+        return true;
     }
 }
 
 
 async function createUser(event) {
     event.preventDefault();
-
-    validarPassword();
     
-    try {
-        let user = {
-            username: usuarioInput.value,
-            email: emailInput.value,
-            password: passwordInput.value,
-            nombre: nombreInput.value,
-            apellido: apellidoInput.value,
-            perfil: perfilInput.value
+    if(usuarioInput.value && emailInput.value && passwordInput.value && nombreInput.value && apellidoInput.value && perfilInput.value){
+        if(validarPassword()){
+            try {
+                let user = {
+                    username: usuarioInput.value,
+                    email: emailInput.value,
+                    password: passwordInput.value,
+                    nombre: nombreInput.value,
+                    apellido: apellidoInput.value,
+                    perfil: perfilInput.options[perfilInput.selectedIndex].value
+                    
+                };
+                console.log(user);
+                
+                let userCreate = await fetch(`${SERVER_URL}/user/altaUsuario`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json', 
+                        "access-token": `${token}`
+                    },
+                    body: JSON.stringify(user)
+                    
+                });
             
-        };
-        console.log(user);
-        
-        let userCreate = await fetch(`${SERVER_URL}/user/altaUsuario`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json', 
-                "access-token": `${token}`
-            },
-            body: JSON.stringify(user)
-            
-        });
-    
-        let userCreated = await userCreate.json();
-        
-        console.log(userCreated);
+                let userCreated = await userCreate.json();
 
-    } catch (error) {
-        //errorMessages.textContent = error;
-        console.log(error);
-        console.log("Error al dar de alta el usuario");
+                
+                if(userCreate.status == 401){  //es pq no estoy logueado o JWT vencido
+                    console.log("Error 401.... Error con al info enviada");
+                }else if(userCreate.status == 402){
+                    console.log("Error 402... El usuario ya existe");
+                    alert("Error 402... El usuario ya existe!") 
+                }else if(userCreate.status == 200){
+                    console.log(userCreated);
+                    alert("Usuario creado con exito!") 
+                    location.href="";
+                }
+                
+        
+            } catch (error) {
+                console.log("Error al dar de alta el usuario");
+            }
+        }else{
+            alert("Error, las contraseñas no coinciden!") 
+        }
+        
+    }else{
+        console.log("Error... Faltan datos...")
+        alert("Error, todos los campos deben se completados!")
     }
+    
 };
+
 
 async function cargarUsuarios(){ 
     if(!token){
@@ -102,7 +134,7 @@ async function cargarUsuarios(){
             let usuario_cargada = await cargarUsuario.json();
             if(cargarUsuario.status == 401){  //es pq no estoy logueado o JWT vencido
                 
-            }else if(cargarUsuario.status == 201){
+            }else if(cargarUsuario.status == 200){
                 if (usuario_cargada) {
                     
                     for(i in usuario_cargada.datos){
@@ -158,7 +190,7 @@ async function modificarUsuario(){
         let usuario_editado = await editar_compania.json();
         if(usuario_editado.status == 401){  //es pq no estoy logueado o JWT vencido
             console.log("Error 401 agregando usuario modificado...")
-        }else if(usuario_editado.status == 201){
+        }else if(usuario_editado.status == 200){
             console.log("Se Agrego OK!!")
         } else {
             console.log("ERROR....");
@@ -187,7 +219,7 @@ async function eliminarUsuario(){
         let compania_eliminada = await eliminar_compania.json();
         if(compania_eliminada.status == 401){  //es pq no estoy logueado o JWT vencido
             console.log("Error 401 eliminando usuario...")
-        }else if(compania_eliminada.status == 201){
+        }else if(compania_eliminada.status == 200){
             console.log("Se elimino OK!!")
         } else {
             console.log("ERROR....");

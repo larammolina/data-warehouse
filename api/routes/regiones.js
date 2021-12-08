@@ -18,7 +18,7 @@ app.get("/consultaRegiones", verifyJWT, async (req, res) => {
         console.log("GET /consultaRegiones ")
         let regiones = await consultarRegiones();
         if (regiones) {
-            res.status(201).send({ datos: regiones });
+            res.status(200).send({ datos: regiones });
         } else {
             res.status(401).send({ msg: "Error al consultar regiones" });
         }
@@ -39,7 +39,7 @@ app.delete("/eliminarRegiones/:_id", verifyJWT, async (req, res) => {
     try {
         let regionesBorradas = await eliminarRegion(req_id);
         if (regionesBorradas) {
-            res.status(201).send({ datos: regionesBorradas });
+            res.status(200).send({ datos: regionesBorradas });
         } else {
             res.status(401).send({ msg: "Error al eliminar region" });
         }
@@ -66,7 +66,7 @@ app.post("/agregarRegiones", verifyJWT, async (req, res) => {
             res.status(400).send({ error: "Error creando la region"});
         }
     } catch (error) {
-        res.status(400).send({ error: "Error creando la region....: " + error });
+        res.status(401).send({ error: "Error creando la region....: " + error });
     }
 });
 
@@ -83,7 +83,7 @@ app.post("/agregarRegiones", verifyJWT, async (req, res) => {
         //console.log(regionModificada)
         res.status(201).send({ msg: "Region Actualizada OK!" });
     } catch (err) {
-        res.status(400).send({ msg: 'Error while updating the Region: ' + err });
+        res.status(401).send({ msg: 'Error while updating the Region: ' + err });
     }
 });
 
