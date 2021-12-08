@@ -33,7 +33,8 @@ Pasos a seguir para probar el trabajo practico:
     2- Instalar Mongo DB
     3- Instalar Node js
     4- Instalar NPM
-    5- Correr npm start
+    5- Correr npm install bcryptjs body-parser express express-validator jsonwebtoken mongoose passport
+    6- Correr npm start
     6- Entrar a la web en local host. (http://localhost:3022/)
     7- Credenciales de ADMIN: Usuario: admin, Contraseña: admin.
     
