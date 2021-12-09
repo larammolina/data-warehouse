@@ -24,16 +24,18 @@ let selectBox_regiones1 = document.getElementById("regiones1");
 let selectBox_regiones2 = document.getElementById("regiones2");
 let selectBox_paises  = document.getElementById("paises1");
 let selectBox_paises2 = document.getElementById("paises2");
-let createBtn = document.getElementById("btn-crear");
+
 let selectedValue_regiones, selectedValue_paises, selectedValue_regiones1, selectedValue_regiones2, selectedValue_regiones3;
+
+const agregarBtn = document.getElementById("btn-crear");
+const modificarBtn = document.getElementById("btn-modificar");
+const eliminarBtn = document.getElementById("btn-eliminar");
 
 
 const SERVER_URL = "http://localhost:3022";
 let regiones = []
 let companias = []
 let contactos = []
-// Create contact listener
-createBtn.addEventListener('click', crearContacto);
 
 async function verificarProfile(){
     if(!token){
@@ -53,7 +55,8 @@ async function verificarProfile(){
 
 
 
-async function crearContacto(){
+agregarBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
     try {
         let contacto = {
             nombre: nombreInput.value,
@@ -86,19 +89,23 @@ async function crearContacto(){
         });
     
         let contactoCreated = await contactoCreate.json();
-        
-        console.log(contactoCreated);
-        if (contactoCreated) {
-            //addUserContainer.style.display = 'none';
-            //location.reload();
+        if(contactoCreate.status == 401){  //es pq no estoy logueado o JWT vencido
+            console.log("Error 401 agregando contacto..." + contactoCreate.status)
+            alert("Error agregando el contacto!")
+        }else if(contactoCreate.status == 200){
+            console.log("Se Agrego OK!!" + contactoCreate.status)
+            alert("Se agrego el contacto con exito!")
+            location.href = "";
+        } else {
+            console.log("ERROR!...."+contactoCreate.status);
+            alert("Se produjo un Error!")
         }
     } catch (error) {
-        //errorMessages.textContent = error;
-        console.log(error);
         console.log("Error al dar de alta el usuario");
+        alert("Se produjo un Error.")
     }
 
-}
+})
 
 //companias
 
@@ -207,7 +214,8 @@ function agregarContactoAlCombo(contactos){
 }
 
 
-async function eliminarContacto(){
+eliminarBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
     var result = confirm("Want to delete?");
     if (result) {
         //Logic to delete the item
@@ -226,19 +234,24 @@ async function eliminarContacto(){
                 //body: JSON.stringify(region)
             });
             let eliminada = await eliminar.json();
-            if(eliminada.status == 401){  //es pq no estoy logueado o JWT vencido
-                console.log("Error 401 eliminando contacto...")
-            }else if(eliminada.status == 200){
-                console.log("Se elimino OK!!")
+            if(eliminar.status == 401){  //es pq no estoy logueado o JWT vencido
+                console.log("Error 401 eliminando contacto..." + eliminar.status)
+                alert("Error eliminando el contacto!")
+            }else if(eliminar.status == 200){
+                console.log("Se elimino OK!!" + eliminar.status)
+                alert("Se elimino el contacto con exito!")
+                location.href = "";
             } else {
-                console.log("ERROR....");
+                console.log("ERROR...." + eliminar.status);
+                alert("Se produjo un Error!")
             }
         } catch (error) {
             console.log(error);
+            alert("Se produjo un Error.")
         }
     }
     
-}
+})
 
 async function cargarRegiones(){ 
     if(!token){
@@ -305,11 +318,15 @@ async function agregarPaisesAlCombo(id_region, donde){
                 str += "<option value='" + regiones[i].paises[j]._id + "'>" + regiones[i].paises[j].nombre + "</option>"
               }
               if(donde == 1) {
-                  document.getElementById("paises1").innerHTML = str;
-                  if(paises.length) agregarCiudadesAlCombo(id_region, paises[0]._id, 1)
+                document.getElementById("paises1").innerHTML = ""
+                document.getElementById("ciudades1").innerHTML = ""
+                document.getElementById("paises1").innerHTML = str;
+                if(paises.length) agregarCiudadesAlCombo(id_region, paises[0]._id, 1)
               }else if(donde == 2) {
-                  document.getElementById("paises2").innerHTML = str;
-                  if(paises.length) agregarCiudadesAlCombo(id_region, paises[0]._id, 2)
+                document.getElementById("paises2").innerHTML = ""
+                document.getElementById("ciudades2").innerHTML = ""
+                document.getElementById("paises2").innerHTML = str;
+                if(paises.length) agregarCiudadesAlCombo(id_region, paises[0]._id, 2)
               }else if(donde == 3) {
                   //document.getElementById("paises3").innerHTML = str;
                   //if(paises.length) agregarCiudadesAlCombo(id_region, paises[0]._id, 3)
@@ -400,7 +417,8 @@ const prefsInput2 = document.getElementById("preferencias2");
 
 
 
-async function modificarContactos(){
+modificarBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
     try {
         let contacto = {
             nombre: nombreInput2.value,
@@ -408,34 +426,8 @@ async function modificarContactos(){
             cargo: cargoInput2.value,
             email: emailInput2.value
         }
-        /*
-        let contacto = {
-            nombre: nombreInput2.value,
-            apellido: apellidoInput2.value,
-            cargo: cargoInput2.value,
-            email: emailInput2.value,
-            compania: companiaInput2.options[companiaInput2.selectedIndex].value,
-            region: regionInput2.options[regionInput2.selectedIndex].value,
-            pais: paisInput2.options[paisInput2.selectedIndex].value,
-            ciudad: ciudadInput2.options[ciudadInput2.selectedIndex].value,
-            direccion: direccionInput2.value,
-            canalDeContacto: {
-                canal: canalInput2.options[canalInput2.selectedIndex].value,
-                cuentaDeUsuario: cuentaInput2.value,
-                preferencias: prefsInput2.options[prefsInput2.selectedIndex].value
-            }
-            
-        };
-        */
 
         if( companiaInput2.options[companiaInput2.selectedIndex].value )  Object.assign(contacto, {compania: companiaInput2.options[companiaInput2.selectedIndex].value})
-        //if( regionInput2.options[regionInput2.selectedIndex].value ) contacto.push({region: regionInput2.options[regionInput2.selectedIndex].value});
-        //if( paisInput2.options[paisInput2.selectedIndex].value ) contacto.push({pais: paisInput2.options[paisInput2.selectedIndex].value});
-        //if( ciudadInput2.options[ciudadInput2.selectedIndex].value ) contacto.push({ciudad: ciudadInput2.options[ciudadInput2.selectedIndex].value});
-        //if( direccionInput2.value ) contacto.push({direccion: direccionInput2.value});
-        //if( canalInput2.options[canalInput2.selectedIndex].value && cuentaInput2.value && prefsInput2.options[prefsInput2.selectedIndex].value ) contacto.push({canalDeContacto: { canal: canalInput2.options[canalInput2.selectedIndex].value, cuentaDeUsuario: cuentaInput2.value, preferencias: prefsInput2.options[prefsInput2.selectedIndex].value }});
-
-        
         console.log(contacto);
 
         let seleccionada = document.getElementById("contactosM2");
@@ -454,25 +446,27 @@ async function modificarContactos(){
         });
     
         let contactoModificado = await contactoMod.json();
-        if(contactoModificado.status == 401){  //es pq no estoy logueado o JWT vencido
-            localStorage.removeItem('token');
-            location.href = "/";
-        }else if(contactoModificado.status == 200){
+        if(contactoMod.status == 401){  //es pq no estoy logueado o JWT vencido
+            console.log("Error modificando el contacto..."+contactoMod.status)
+            alert("Error modificando el contacto!")
+        }else if(contactoMod.status == 200){
             console.log(contactoModificado);
+            alert("Se modifico el contacto con exito!")
+            location.href = "";
         } else {
-            console.log("ERROR....");
+            console.log("ERROR...." + contactoMod.status);
+            alert("Se produjo un Error!")
         }
         
         
     
     } catch (error) {
-        //errorMessages.textContent = error;
-        console.log(error);
         console.log("Error al modificar contacto");
+        alert("Se produjo un Error.")
     }
 
 
-}
+})
 
 
 cargarRegiones();

@@ -30,6 +30,12 @@ header img {
     border-radius: 35px;
 }
 
+.derecha{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+}
+
 button, .button{
     margin: 10px;
     background-color: #aea985;
@@ -94,6 +100,8 @@ a:hover{
 
 form {
     margin: 20px;
+    align-items: center;
+    text-align: center;
 }
 
 form .form, form label, form select{
@@ -102,11 +110,13 @@ form .form, form label, form select{
     justify-content: space-between;
     width: 400px;
     align-items: center;
+    text-align: center;
 }
 
 form select {
     border-radius: 25px;
     margin: 5px;
+    align-items: center;
 }
 
 form input{
@@ -117,6 +127,8 @@ form input{
     padding: 5px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: medium;
+    align-items: center;
+    text-align: center;
 }
 
 .none{
@@ -128,6 +140,10 @@ form input{
     border-radius: 25px;
     width: auto;
 }
+
+.borde input {
+    border: none;
+} 
 
 i{
     margin: 5px;
@@ -177,23 +193,87 @@ footer p {
     margin: 25px;
 }
 
+.ocultar{
+    display: none;
+}
 
 .resultado {
     border-radius: 25px;
     padding: 15px;
     border:#006241 solid 3px;
-    width: 80%;
+    width: auto;
 }
 
 .resultado .titulos {
     display: grid;
-    grid-template-columns: 100px 200px 200px 200px 300px 200px;
+    grid-template-columns: 70px 200px 200px 200px 300px 200px;
     grid-template-rows: auto auto auto auto auto auto;
 }
 
 .resultadoApi{
     display: grid;
-    grid-template-columns:  100px 200px 200px 200px 300px 200px;
+    grid-template-columns:  70px 200px 200px 200px 300px 200px;
     grid-template-rows: auto auto auto auto auto auto;
 
+}
+
+
+@media screen and (min-width: 600px) and (max-width:699px) {
+
+
+
+    .alto{
+        height: 200px;
+    }
+    
+    
+    
+}
+
+
+
+@media screen and (min-width: 700px) {
+
+
+
+.alto{
+    height: 200px;
+}
+
+
+
+}
+
+
+@media screen and (min-width: 1024px) {
+
+
+    .alto{
+        height: 528px;
+    }
+
+    .resultado {
+        border-radius: 25px;
+        padding: 15px;
+        border:#006241 solid 3px;
+        width: 90%;
+    }
+    
+    
+}
+
+@media screen and (min-width: 1080px ) {
+
+
+    .alto{
+        height: 1080px;
+    }
+    
+    .resultado {
+        border-radius: 25px;
+        padding: 15px;
+        border:#006241 solid 3px;
+        width: 90%;
+    }
+    
 }

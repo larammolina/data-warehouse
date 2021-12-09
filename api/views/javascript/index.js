@@ -36,7 +36,8 @@ loginBtn.addEventListener("click", (event) => {
                         localStorage.setItem("profile", JSON.stringify(profile));
                         location.href = "users.html";
                     } else {
-                        notification.innerHTML = "Email or password is not valid!";
+                        //notification.innerHTML = "Email or password is not valid!";
+                        alert("Usuario o contraseña incorrecta...")
                         usernameInput.value = '';
                         passwordInput.value = '';
                     }
@@ -44,6 +45,7 @@ loginBtn.addEventListener("click", (event) => {
             } else {
                 //notification.innerHTML = "Email or password is not valid!";
                 console.log("Error: " + response.json());
+                alert("Usuario o contraseña incorrecta...")
                 usernameInput.value = '';
                 passwordInput.value = '';
             }

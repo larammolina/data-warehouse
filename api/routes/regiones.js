@@ -81,7 +81,7 @@ app.post("/agregarRegiones", verifyJWT, async (req, res) => {
         let regionID = req.params;
         let regionModificada = await actualizarRegion(regionEditar, regionID);
         //console.log(regionModificada)
-        res.status(201).send({ msg: "Region Actualizada OK!" });
+        res.status(200).send({ msg: "Region Actualizada OK!" });
     } catch (err) {
         res.status(401).send({ msg: 'Error while updating the Region: ' + err });
     }

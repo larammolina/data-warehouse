@@ -23,7 +23,7 @@ const { serializeUser } = require('passport');
             res.status(200).send({ msj: "Contacto modificadad OK!" });
         }
     } catch (err) {
-        res.status(400).send({ msg: 'Error moficando contacto: ' + err });
+        res.status(401).send({ msg: 'Error moficando contacto: ' + err });
     }
 });
 

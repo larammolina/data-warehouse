@@ -67,6 +67,7 @@ button, .button{
     text-align: center;   
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: medium;
+    justify-content: center;
 }
 
 form{
@@ -83,6 +84,7 @@ form .form{
     justify-content: space-between;
     width: 400px;
     align-items: center;
+    justify-content: center;
 }
 
 form input{
@@ -93,6 +95,7 @@ form input{
     padding: 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: medium;
+    justify-content: center;
 }
 
 .marcador {
@@ -115,7 +118,7 @@ form input{
 }
 
 .alto{
-    height: 700px;
+    height: 500px;
 }
 
 .back {
@@ -146,7 +149,7 @@ form input{
 }
 
 .blanco{
-    height: 500px;
+    height: 300px;
 }
 
 .center {
@@ -181,4 +184,52 @@ a .menuAbajo {
 footer p {
     color: lightgrey;
     margin: 25px;
+}
+
+
+@media screen and (min-width: 600px) and (max-width:699px) {
+
+
+
+    .alto{
+        height: 400px;
+    }
+    
+    
+    
+}
+
+
+
+@media screen and (min-width: 700px) {
+
+
+
+.alto{
+    height: 800px;
+}
+
+
+
+}
+
+
+@media screen and (min-width: 1024px) {
+
+
+    .alto{
+        height: 1000px;
+    }
+    
+    
+}
+
+@media screen and (min-width: 1080px ) {
+
+
+    .alto{
+        height: 1400px;
+    }
+    
+    
 }

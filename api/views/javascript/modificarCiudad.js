@@ -10,9 +10,12 @@ let selectBox_regiones3 = document.getElementById("regiones3");
 let selectBox_paises  = document.getElementById("paises");
 let selectBox_paises2 = document.getElementById("paises2");
 let selectBox_paises3 = document.getElementById("paises3");
-let input_agregarPais = document.getElementById('ciudad_agregar');
+let input_agregarPais = document.getElementById('ciudades1');
 let selectedValue_regiones, selectedValue_paises, selectedValue_regiones1, selectedValue_regiones2, selectedValue_regiones3;
 
+const agregarBtn = document.getElementById("btn-agregar");
+const modificarBtn = document.getElementById("btn-modificar");
+const eliminarBtn = document.getElementById("btn-elimininar");
 
 verificarProfile();
 
@@ -32,40 +35,42 @@ async function verificarProfile(){
     }
 }
 
-async function agregarCiudad(){
+agregarBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
     console.log("Ciudad a agregar: " + input_agregarPais.value)
     let seleccionada = document.getElementById("paises1");
     seleccionada = seleccionada.options[seleccionada.selectedIndex].value;
-    //if(input_agregarRegion.value.isNaN == false){
-        try {
-            let ciudad = {
-                nombre: input_agregarPais.value
-            };
-            console.log(ciudad);
-            let agregar_ciudad = await fetch(`${SERVER_URL}/ciudades/agregarCiudad/${seleccionada}`, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json', 
-                    "access-token": `${token}`
-                },
-                body: JSON.stringify(ciudad)
-            });
-            let ciudad_agregada = await agregar_ciudad.json();
-            if(ciudad_agregada.status == 401){  //es pq no estoy logueado o JWT vencido
-                console.log("Error 401 agregando region...")
-            }else if(ciudad_agregada.status == 200){
-                console.log("Se Agrego OK!!")
-            } else {
-                console.log("ERROR....");
-            }
-        } catch (error) {
-            console.log(error);
+    try {
+        let ciudad = {
+            nombre: input_agregarPais.value
+        };
+        console.log(ciudad);
+        let agregar_ciudad = await fetch(`${SERVER_URL}/ciudades/agregarCiudad/${seleccionada}`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json', 
+                "access-token": `${token}`
+            },
+            body: JSON.stringify(ciudad)
+        });
+        let ciudad_agregada = await agregar_ciudad.json();
+        if(agregar_ciudad.status == 401){  //es pq no estoy logueado o JWT vencido
+            console.log("Error 401 agregando region..."+agregar_ciudad.status)
+            alert("Error agregando la ciudad!")
+        }else if(agregar_ciudad.status == 200){
+            console.log("Se Agrego OK!!"+agregar_ciudad.status)
+            alert("Se agrego la ciudad con exito!")
+            location.href = "";
+        } else {
+            console.log("ERROR...."+agregar_ciudad.status);
+            alert("Se produjo un Error!")
         }
-    //} else {
-    //    console.log('es por aca')
-    //}
-}
+    } catch (error) {
+        console.log(error);
+        alert("Se produjo un Error.")
+    }
+})
 
 async function cargarRegiones(){ 
     if(!token){
@@ -117,6 +122,12 @@ function agregarRegionAlCombo(regiones){
     document.getElementById("regiones1").innerHTML = str;
     document.getElementById("regiones2").innerHTML = str;
     document.getElementById("regiones3").innerHTML = str;
+    document.getElementById("paises1").innerHTML = ""
+    document.getElementById("paises2").innerHTML = ""
+    document.getElementById("paises3").innerHTML = ""
+    document.getElementById("ciudades1").innerHTML = ""
+    document.getElementById("ciudades2").innerHTML = ""
+    document.getElementById("ciudades3").innerHTML = ""
     agregarPaisesAlCombo(regiones[0]._id,1)
     agregarPaisesAlCombo(regiones[0]._id,2)
     agregarPaisesAlCombo(regiones[0]._id,3)
@@ -133,12 +144,15 @@ async function agregarPaisesAlCombo(id_region, donde){
               }
               if(donde == 1) {
                   document.getElementById("paises1").innerHTML = str;
+                  document.getElementById("ciudades1").innerHTML = ""
                   if(paises.length) agregarCiudadesAlCombo(id_region, paises[0]._id, 1)
               }else if(donde == 2) {
                   document.getElementById("paises2").innerHTML = str;
+                  document.getElementById("ciudades2").innerHTML = ""
                   if(paises.length) agregarCiudadesAlCombo(id_region, paises[0]._id, 2)
               }else if(donde == 3) {
                   document.getElementById("paises3").innerHTML = str;
+                  document.getElementById("ciudades3").innerHTML = ""
                   if(paises.length) agregarCiudadesAlCombo(id_region, paises[0]._id, 3)
               }
 
@@ -213,7 +227,8 @@ async function cambioPais3() {
     agregarCiudadesAlCombo(selectedValue_regiones3, selectedValue_paises3, 3)
 }
 
-async function modificarCiudad(){
+modificarBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
     let seleccionada = document.getElementById("ciudades2");
     seleccionada = seleccionada.options[seleccionada.selectedIndex].value;
     console.log('Ciudad seleccionada: ' + seleccionada);
@@ -236,20 +251,26 @@ async function modificarCiudad(){
             body: JSON.stringify(pais)
         });
         let pais_editada = await editar_pais.json();
-        if(pais_editada.status == 401){  //es pq no estoy logueado o JWT vencido
-            console.log("Error 401 agregando pais...")
-        }else if(pais_editada.status == 200){
-            console.log("Se Agrego OK!!")
+        if(editar_pais.status == 401){  //es pq no estoy logueado o JWT vencido
+            console.log("Error 401 agregando pais..."+editar_pais.status)
+            alert("Error modificando la ciudad!")
+        }else if(editar_pais.status == 200){
+            console.log("Se Agrego OK!!"+editar_pais.status)
+            alert("Se modifico la ciudad con exito!")
+            location.href = "";
         } else {
-            console.log("ERROR....");
+            console.log("ERROR...."+editar_pais.status);
+            alert("Se produjo un Error!")
         }
     } catch (error) {
         console.log(error);
+        alert("Se produjo un Error.")
     }
 
-}
+})
 
-async function eliminarCiudad(){
+eliminarBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
     let seleccionada = document.getElementById("ciudades3");
     seleccionada = seleccionada.options[seleccionada.selectedIndex].value;
     console.log('Ciudad seleccionada: ' + seleccionada);
@@ -265,15 +286,20 @@ async function eliminarCiudad(){
             //body: JSON.stringify(region)
         });
         let ciudad_eliminada = await eliminar_ciudad.json();
-        if(ciudad_eliminada.status == 401){  //es pq no estoy logueado o JWT vencido
-            console.log("Error 401 eliminando region...")
-        }else if(ciudad_eliminada.status == 20){
-            console.log("Se elimino OK!!")
+        if(eliminar_ciudad.status == 401){  //es pq no estoy logueado o JWT vencido
+            console.log("Error 401 eliminando region..."+eliminar_ciudad.status)
+            alert("Error eliminando la region!")
+        }else if(eliminar_ciudad.status == 200){
+            console.log("Se elimino OK!!"+eliminar_ciudad.status)
+            alert("Se elimino la region con exito!")
+            location.href = "";
         } else {
-            console.log("ERROR....");
+            console.log("ERROR...."+eliminar_ciudad.status);
+            alert("Se produjo un Error!")
         }
     } catch (error) {
         console.log(error);
+        alert("Se produjo un Error.")
     }
 
-}
+})

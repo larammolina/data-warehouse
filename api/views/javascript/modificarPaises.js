@@ -10,6 +10,10 @@ let selectBox_paises = document.getElementById("paises");
 let input_agregarPais = document.getElementById('paises1');
 let selectedValue_regiones, selectedValue_paises;
 
+const agregarBtn = document.getElementById("btn-agregar");
+const modificarBtn = document.getElementById("btn-modificar");
+const eliminarBtn = document.getElementById("btn-elimininar");
+
 verificarProfile();
 
 async function verificarProfile(){
@@ -29,41 +33,42 @@ async function verificarProfile(){
 }
 
 
-async function agregarPais(){
+agregarBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
     console.log("Pais a agregar: " + input_agregarPais.value)
-    let seleccionada = document.getElementById("regiones2");
+    let seleccionada = document.getElementById("regiones1");
     seleccionada = seleccionada.options[seleccionada.selectedIndex].value;
-
-    //if(input_agregarRegion.value.isNaN == false){
-        try {
-            let pais = {
-                nombre: input_agregarPais.value,
-            };
-            console.log(pais);
-            let agregar_pais = await fetch(`${SERVER_URL}/paises/agregarPais/${seleccionada}/`, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json', 
-                    "access-token": `${token}`
-                },
-                body: JSON.stringify(pais)
-            });
-            let pais_agregada = await pais_region.json();
-            if(pais_agregada.status == 401){  //es pq no estoy logueado o JWT vencido
-                console.log("Error 401 agregando region...")
-            }else if(pais_agregada.status == 200){
-                console.log("Se Agrego OK!!")
-            } else {
-                console.log("ERROR....");
-            }
-        } catch (error) {
-            console.log(error);
+    try {
+        let pais = {
+            nombre: input_agregarPais.value,
+        };
+        console.log(pais);
+        let pais_region = await fetch(`${SERVER_URL}/paises/agregarPais/${seleccionada}/`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json', 
+                "access-token": `${token}`
+            },
+            body: JSON.stringify(pais)
+        });
+        let pais_agregada = await pais_region.json();
+        if(pais_region.status == 401){  //es pq no estoy logueado o JWT vencido
+            console.log("Error 401 agregando region..."+pais_region.status )
+            alert("Error agregando el pais!")
+        }else if(pais_region.status == 200){
+            console.log("Se Agrego OK!!"+pais_region.status )
+            alert("Se agrego el pais con exito!")
+            location.href = "";
+        } else {
+            console.log("ERROR....");
+            alert("Se produjo un Error!")
         }
-    //} else {
-    //    console.log('es por aca')
-    //}
-}
+    } catch (error) {
+        console.log(error);
+        alert("Se produjo un Error.")
+    }
+})
 
 async function cargarRegiones(){ 
     if(!token){
@@ -115,6 +120,9 @@ function agregarRegionAlCombo(regiones){
     document.getElementById("regiones1").innerHTML = str;
     document.getElementById("regiones2").innerHTML = str;
     document.getElementById("regiones3").innerHTML = str;
+
+    document.getElementById("paises2").innerHTML = ""
+    document.getElementById("paises3").innerHTML = ""
     
     agregarPaises(regiones[0]._id,2)
     agregarPaises(regiones[0]._id,3)
@@ -184,7 +192,8 @@ async function cambioPais() {
     agregarCiudades(selectedValue_regiones, selectedValue_paises)
 }
 
-async function modificarPais(){
+modificarBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
     let seleccionada = document.getElementById("paises2");
     let nueva = document.getElementById('pais_nuevo').value;
 
@@ -209,20 +218,26 @@ async function modificarPais(){
             body: JSON.stringify(pais)
         });
         let pais_editada = await editar_pais.json();
-        if(pais_editada.status == 401){  //es pq no estoy logueado o JWT vencido
-            console.log("Error 401 agregando pais...")
-        }else if(pais_editada.status == 200){
-            console.log("Se Agrego OK!!")
+        if(editar_pais.status == 401){  //es pq no estoy logueado o JWT vencido
+            console.log("Error 401 agregando pais..."+editar_pais.status)
+            alert("Error modificando el pais!")
+        }else if(editar_pais.status == 200){
+            console.log("Se Agrego OK!!"+editar_pais.status)
+            alert("Se modifico el pais con exito!")
+            location.href = "";
         } else {
-            console.log("ERROR....");
+            console.log("ERROR...."+editar_pais.status);
+            alert("Se produjo un Error!")
         }
     } catch (error) {
         console.log(error);
+        alert("Se produjo un Error.")
     }
 
-}
+})
 
-async function eliminarPais(){
+eliminarBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
     let seleccionada = document.getElementById("paises3");
     seleccionada = seleccionada.options[seleccionada.selectedIndex].value;
     console.log('Pais seleccionada: ' + seleccionada);
@@ -238,15 +253,20 @@ async function eliminarPais(){
             //body: JSON.stringify(region)
         });
         let pais_eliminada = await eliminar_pais.json();
-        if(pais_eliminada.status == 401){  //es pq no estoy logueado o JWT vencido
-            console.log("Error 401 eliminando region...")
-        }else if(pais_eliminada.status == 200){
-            console.log("Se elimino OK!!")
+        if(eliminar_pais.status == 401){  //es pq no estoy logueado o JWT vencido
+            console.log("Error 401 eliminando region..."+eliminar_pais.status)
+            alert("Error eliminando el pais!")
+        }else if(eliminar_pais.status == 200){
+            console.log("Se elimino OK!!"+eliminar_pais.status)
+            alert("Se elimino el pais con exito!")
+            location.href = "";
         } else {
-            console.log("ERROR....");
+            console.log("ERROR...."+eliminar_pais.status);
+            alert("Se produjo un Error!")
         }
     } catch (error) {
         console.log(error);
+        alert("Se produjo un Error.")
     }
 
-}
+})

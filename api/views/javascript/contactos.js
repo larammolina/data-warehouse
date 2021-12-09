@@ -82,6 +82,8 @@ async function buscarContacto() {
                 } else if (buscarContactos.status == 200) {
                     if (busqueda) {
                         contactosBuscados = busqueda.resultado
+                        let resultado = document.getElementById("resultadoApi");
+                        resultado.innerHTML = '';
                         for (i in busqueda.resultado) {
                             console.log("Nombres: " + busqueda.resultado[i].nombre);
                             console.log("Apellido: " + busqueda.resultado[i].apellido);
@@ -181,10 +183,77 @@ async function buscarContacto() {
                     location.href = "/";
                 } else if (buscarContactos.status == 200) {
                     if (busqueda) {
+                        contactosBuscados = busqueda.datos
+                        let resultado = document.getElementById("resultadoApi");
+                        resultado.innerHTML = '';
                         for (i in busqueda.datos) {
+
                             console.log("Nombres: " + busqueda.datos[i].nombre);
                             console.log("Apellido: " + busqueda.datos[i].apellido);
+                            console.log("ID: "+contactosBuscados[i]._id)
 
+                            let resultado = document.getElementById("resultadoApi");
+                            let p_nombre = document.createElement("P");
+                            let p_apellido = document.createElement("P");
+                            let p_email = document.createElement("P");
+                            let p_compania = document.createElement("P");
+                            let p_cargo = document.createElement("P");
+                            let p_region = document.createElement("P");
+                            let p_pais = document.createElement("P");
+                            let p_ciudad = document.createElement("P");
+                            let p_direccion = document.createElement("P");
+                            let p_interes = document.createElement("P");
+                            let p_canalDeContacto = document.createElement("P");
+                            let check = document.createElement("input");
+
+                            check.setAttribute("id", busqueda.datos[i]._id)
+                            check.setAttribute("type", "checkbox")
+
+
+
+                            p_nombre.innerHTML = busqueda.datos[i].nombre;
+                            p_apellido.innerHTML = busqueda.datos[i].apellido;
+                            p_cargo.innerHTML = busqueda.datos[i].cargo;
+                            p_email.innerHTML = busqueda.datos[i].email;
+                            if (busqueda.datos[i].compania[0]) {
+                                p_compania.innerHTML = busqueda.datos[i].compania[0].nombre;
+                            } else {
+                                p_compania.innerHTML = "";
+                            }
+
+                            if (busqueda.datos[i].region[0]) {
+                                p_region.innerHTML = busqueda.datos[i].region[0].nombre;
+                            } else {
+                                p_region.innerHTML = "";
+                            }
+
+                            if (busqueda.datos[i].pais[0]) {
+                                p_pais.innerHTML = busqueda.datos[i].pais[0].nombre;
+                            } else {
+                                p_pais.innerHTML = "";
+                            }
+
+                            if (busqueda.datos[i].ciudad[0]) {
+                                p_ciudad.innerHTML = busqueda.datos[i].ciudad[0].nombre;
+                            } else {
+                                p_ciudad.innerHTML = "";
+                            }
+
+
+                            p_direccion.innerHTML = busqueda.datos[i].direccion;
+                            p_interes.innerHTML = busqueda.datos[i].interes;
+                            p_canalDeContacto.innerHTML = busqueda.datos[i].canalDeContacto;
+
+                            resultado.appendChild(check)
+                            resultado.appendChild(p_nombre);
+                            resultado.appendChild(p_cargo);
+                            resultado.appendChild(p_email);
+                            resultado.appendChild(p_compania);
+                            //resultado.appendChild(p_region);
+                            //resultado.appendChild(p_pais);
+                            resultado.appendChild(p_ciudad);
+                            //resultado.appendChild(p_interes);
+                            //resultado.appendChild(p_canalDeContacto);
                             
                         }
                     }

@@ -15,6 +15,10 @@ let selectBox_regiones1 = document.getElementById("regionesA");
 let selectBox_paises  = document.getElementById("paisesA");
 let selectedValue_regiones, selectedValue_paises, selectedValue_regiones1, selectedValue_regiones2, selectedValue_regiones3;
 
+const agregarBtn = document.getElementById("btn_agregar");
+const modificarBtn = document.getElementById("btn_modif");
+const eliminarBtn = document.getElementById("btn_elimini");
+
 cargarCompanias();
 
 //cargo regiones al inicio
@@ -57,15 +61,6 @@ async function cargarCompanias() {
                 location.href = "/";
             }else if(cargarCompanias.status == 200){
                 if (companias_cargadas) {
-                    /*for(i in companias_cargadas.datos){
-                        console.log("Compania: " + companias_cargadas.datos[i].nombre + " " + companias_cargadas.datos[i].direccion + " " +companias_cargadas.datos[i].email + " " +companias_cargadas.datos[i].telefono + companias_cargadas.datos[i].ciudad);
-                        let resultado = document.getElementById("resultadoApi");
-                        let nodoNombre = document.createTextNode(companias_cargadas.datos[i].nombre);
-                        let nodoDireccion = document.createTextNode(companias_cargadas.datos[i].direccion);
-                        let nodoPais = document.createTextNode(companias_cargadas.datos[i].pais);
-                        resultado.appendChild(nodoNombre);
-                        resultado.appendChild(nodoDireccion);
-                    }*/
                     for(i in companias_cargadas.datos){
                         //imprimo las regiones por pantalla
                         console.log(companias_cargadas.datos[i].nombre);
@@ -93,7 +88,8 @@ function agregarCompaniaAlCombo(companias){
 
 }
 
-async function modificarCompania(){
+modificarBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
     let seleccionada = document.getElementById("compania2");
     let nueva = document.getElementById('companiaNueva').value;
 
@@ -118,20 +114,26 @@ async function modificarCompania(){
             body: JSON.stringify(compania)
         });
         let compania_editada = await editar_compania.json();
-        if(compania_editada.status == 401){  //es pq no estoy logueado o JWT vencido
-            console.log("Error 401 agregando region...")
-        }else if(compania_editada.status == 200){
-            console.log("Se Agrego OK!!")
+        if(editar_compania.status == 401){  //es pq no estoy logueado o JWT vencido
+            console.log("Error modificando la compania..."+editar_compania.status)
+            alert("Error modificando la compania!")
+        }else if(editar_compania.status == 200){
+            console.log("Se modifico OK!!"+editar_compania.status)
+            alert("Se modifico la compania con exito!")
+            location.href = "";
         } else {
-            console.log("ERROR....");
+            console.log("ERROR...."+editar_compania.status);
+            alert("Se produjo un Error!")
         }
     } catch (error) {
         console.log(error);
+        alert("Se produjo un Error.")
     }
 
-}
+})
 
-async function eliminarCompania(){
+eliminarBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
     let seleccionada = document.getElementById("compania3");
     seleccionada = seleccionada.options[seleccionada.selectedIndex].value;
     console.log('Compania seleccionada: ' + seleccionada);
@@ -147,20 +149,27 @@ async function eliminarCompania(){
             //body: JSON.stringify(region)
         });
         let compania_eliminada = await eliminar_compania.json();
-        if(compania_eliminada.status == 401){  //es pq no estoy logueado o JWT vencido
-            console.log("Error 401 eliminando region...")
-        }else if(compania_eliminada.status == 200){
-            console.log("Se elimino OK!!")
+        if(eliminar_compania.status == 401){  //es pq no estoy logueado o JWT vencido
+            console.log("Error 401 eliminando region..."+eliminar_compania.status)
+            alert("Error eliminando la compania!")
+        }else if(eliminar_compania.status == 200){
+            console.log("Se elimino OK!!")+eliminar_compania.status
+            alert("Se elimino la compania con exito!")
+            location.href = "";
         } else {
-            console.log("ERROR....");
+            console.log("ERROR...."+eliminar_compania.status);
+            alert("Se produjo un Error!")
         }
     } catch (error) {
         console.log(error);
+        alert("Se produjo un Error.")
     }
 
-}
+})
 
-async function agregarCompania(){
+agregarBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
+
     console.log("Compania a agregar: " + input_agregarComp.value)
     
     let seleccionada = document.getElementById("ciudadesA");
@@ -186,20 +195,24 @@ async function agregarCompania(){
                 body: JSON.stringify(compania)
             });
             let compania_agregada = await agregar_compania.json();
-            if(compania_agregada.status == 401){  //es pq no estoy logueado o JWT vencido
-                console.log("Error 401 agregando region...")
-            }else if(compania_agregada.status == 200){
-                console.log("Se Agrego OK!!")
+            if(agregar_compania.status == 401){  //es pq no estoy logueado o JWT vencido
+                console.log("Error 401 agregando region..." + agregar_compania.status)
+                alert("Error agregando la compania!")
+                //location.href = "";
+            }else if(agregar_compania.status == 200){
+                console.log("Se Agrego OK!!" + agregar_compania.status)
+                alert("Se agrego la compania con exito!")
+                location.href = "";
             } else {
-                console.log("ERROR....");
+                console.log("ERROR...."+ agregar_compania.status);
+                alert("Se produjo un Error!" )
+                //location.href = "";
             }
         } catch (error) {
             console.log(error);
+            alert("Se produjo un Error.")
         }
-    //} else {
-    //    console.log('es por aca')
-    //}
-}
+})
 
 async function cargarRegiones(){ 
     if(!token){
@@ -246,11 +259,15 @@ function agregarRegionAlCombo(regiones){
         str += "<option value='" + regiones[i]._id + "'>" + regiones[i].nombre + "</option>"
     }
     document.getElementById("regionesA").innerHTML = str;
+    document.getElementById("paisesA").innerHTML = ""
+    document.getElementById("ciudadesA").innerHTML = ""
     agregarPaisesAlCombo(regiones[0]._id,1)
 }
 
 async function agregarPaisesAlCombo(id_region, donde){
     let str = "";
+    document.getElementById("paisesA").innerHTML = ""
+    document.getElementById("ciudadesA").innerHTML = ""
     let paises;
     for (let i=0; i<regiones.length; i++) {
         if(regiones[i]._id == id_region){

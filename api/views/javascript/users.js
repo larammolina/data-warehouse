@@ -23,8 +23,10 @@ async function verificarProfile(){
         if(profile == "admin"){
             console.log("Soy admin")
         }else{
+            //nav
             var element = document.getElementById("usuariosMenu");
             element.classList.add("ocultar");
+            //footer
             var element2 = document.getElementById("usuariosMenuFooter");
             element2.classList.add("ocultar");
         }

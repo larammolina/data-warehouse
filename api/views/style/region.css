@@ -113,21 +113,30 @@ button, .button{
     align-items: baseline;
 }
 
+/*
 form {
     margin: 20px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 form .form, form label, form select{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 400px;
-    align-items: center;
+    text-align: center;
+    justify-content: center;
+    
+    
 }
 
 form select {
     border-radius: 25px;
     margin: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 form input{
@@ -138,6 +147,37 @@ form input{
     padding: 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: medium;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}*/
+
+form{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form .form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 400px;
+    align-items: center;
+    justify-content: center;
+}
+
+form input{
+   margin: 15px; 
+    width: 250px;
+    height: auto;
+    text-align: center;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+    justify-content: center;
 }
 
 .title {
@@ -148,6 +188,7 @@ form input{
     height: 50px;
     padding: 25px;
     margin: auto;
+    
 }
 
 .back {
@@ -167,7 +208,7 @@ form input{
 }
 
 .alto{
-    height: 500px;
+    height: 300px;
 }
 
 footer{
@@ -192,4 +233,52 @@ a .menuAbajo {
 footer p {
     color: lightgrey;
     margin: 25px;
+}
+
+
+@media screen and (min-width: 600px) and (max-width:699px) {
+
+
+
+    .alto{
+        height: 300px;
+    }
+    
+    
+    
+}
+
+
+
+@media screen and (min-width: 700px) {
+
+
+
+.alto{
+    height: 500px;
+}
+
+
+
+}
+
+
+@media screen and (min-width: 1024px) {
+
+
+    .alto{
+        height: 800px;
+    }
+    
+    
+}
+
+@media screen and (min-width: 1080px) {
+
+
+    .alto{
+        height: 1400px;
+    }
+    
+    
 }

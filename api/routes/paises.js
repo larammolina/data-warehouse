@@ -21,7 +21,7 @@ const { verifyJWT, isAdmin } = require("./middlewares.js")
             res.status(200).send({ msj: "Pais Modificado OK" });
         }
     } catch (err) {
-        res.status(400).send({ msg: 'Error modificando el pais...: ' + err });
+        res.status(401).send({ msg: 'Error modificando el pais...: ' + err });
     }
 });
 
@@ -40,7 +40,7 @@ const { verifyJWT, isAdmin } = require("./middlewares.js")
             res.status(200).send({ id: paisCreado._id });
         }
     } catch (error) {
-        res.status(400).send({ error: "Error creando la region....: " + error });
+        res.status(401).send({ error: "Error creando la region....: " + error });
     }
 });
 
@@ -57,7 +57,7 @@ const { verifyJWT, isAdmin } = require("./middlewares.js")
             res.status(200).send({ id: paisElimidado._id });
         }
     } catch (err) {
-        res.status(400).send({ msg: 'Error eliminando pais... ' + err });
+        res.status(401).send({ msg: 'Error eliminando pais... ' + err });
     }
 });
 

@@ -65,7 +65,8 @@ async function cargarCompanias() {
                      
 
                         p_nombre.innerHTML = companias_cargadas.datos[i].nombre;
-                        p_pais.innerHTML = companias_cargadas.datos[i].ciudades[0].nombre;
+                        if( companias_cargadas.datos[i].ciudades[0] ) p_pais.innerHTML = companias_cargadas.datos[i].ciudades[0].nombre;
+                        else p_pais.innerHTML = ""
                         p_direccion.innerHTML = companias_cargadas.datos[i].direccion;
                         p_email.innerHTML = companias_cargadas.datos[i].email;
                         p_telefono.innerHTML = companias_cargadas.datos[i].telefono;

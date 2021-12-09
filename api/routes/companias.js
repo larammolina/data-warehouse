@@ -60,10 +60,10 @@ app.post("/agregarCompanias", verifyJWT, async (req, res) => {
         if (companiaCreada) {
           res.status(200).send({ id: companiaCreada._id });
         }else{
-            res.status(400).send({ error: "Error creando la compania"});
+            res.status(401).send({ error: "Error creando la compania"});
         }
     } catch (error) {
-        res.status(400).send({ error: "Error creando la compania....: " + error });
+        res.status(401).send({ error: "Error creando la compania....: " + error });
     }
 });
 
@@ -80,7 +80,7 @@ app.post("/agregarCompanias", verifyJWT, async (req, res) => {
         //console.log(regionModificada)
         res.status(200).send({ msg: "Compania Actualizada OK!" });
     } catch (err) {
-        res.status(400).send({ msg: 'Error actualizando la compania: ' + err });
+        res.status(401).send({ msg: 'Error actualizando la compania: ' + err });
     }
 });
 
