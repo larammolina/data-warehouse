@@ -1,4 +1,4 @@
-# data-warehouse
+# data-warehouse Modo Freelance
 TP 4 Acamica
 --------------------------------------------------------------------------------------
 
@@ -35,8 +35,7 @@ Pasos a seguir para probar el trabajo practico:
     4- Instalar NPM
     5- Correr npm install bcryptjs body-parser express express-validator jsonwebtoken mongoose passport
     6- Correr npm start
-    6- Entrar a la web en local host. (http://localhost:3022/)
-    7- Credenciales de ADMIN: Usuario: admin, Contraseña: admin.
+    7- Usar Postman para dar de alta el usuario administrador. Utilizar el endpoint user/altaUsuario con los siguientes valores que deseen, pero el "perfil" debe ser "admin". Luego, una vez dado de alta, entrar a la web, logearse como admin y empezar a utilizar la web.(http://localhost:3022/index.html)
     
     
 --------------------------------------------------------------------------------------
