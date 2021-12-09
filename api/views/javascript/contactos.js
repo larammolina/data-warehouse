@@ -17,21 +17,23 @@ let selectBox_paises2 = document.getElementById("paises2");
 let selectedValue_regiones, selectedValue_paises, selectedValue_regiones1, selectedValue_regiones2, selectedValue_regiones3;
 
 const SERVER_URL = "http://localhost:3022";
-
+let contactosBuscados = []
 var i;
 
 verificarProfile();
 
-async function verificarProfile() {
-    if (!token) {
+async function verificarProfile(){
+    if(!token){
         localStorage.removeItem('token');
         location.href = "/";
-    } else {
-        if (profile == "admin") {
-            console.log("Soy admin PERRI")
-        } else {
+    }else{
+        if(profile == "admin"){
+            console.log("Soy admin")
+        }else{
             var element = document.getElementById("usuariosMenu");
             element.classList.add("ocultar");
+            var element2 = document.getElementById("usuariosMenuFooter");
+            element2.classList.add("ocultar");
         }
     }
 }
@@ -79,9 +81,11 @@ async function buscarContacto() {
                     location.href = "/";
                 } else if (buscarContactos.status == 200) {
                     if (busqueda) {
+                        contactosBuscados = busqueda.resultado
                         for (i in busqueda.resultado) {
                             console.log("Nombres: " + busqueda.resultado[i].nombre);
                             console.log("Apellido: " + busqueda.resultado[i].apellido);
+                            console.log("ID: "+contactosBuscados[i]._id)
 
                             let resultado = document.getElementById("resultadoApi");
                             let p_nombre = document.createElement("P");
@@ -95,6 +99,10 @@ async function buscarContacto() {
                             let p_direccion = document.createElement("P");
                             let p_interes = document.createElement("P");
                             let p_canalDeContacto = document.createElement("P");
+                            let check = document.createElement("input");
+
+                            check.setAttribute("id", busqueda.resultado[i]._id)
+                            check.setAttribute("type", "checkbox")
 
 
 
@@ -131,16 +139,17 @@ async function buscarContacto() {
                             p_interes.innerHTML = busqueda.resultado[i].interes;
                             p_canalDeContacto.innerHTML = busqueda.resultado[i].canalDeContacto;
 
-
+                            resultado.appendChild(check)
                             resultado.appendChild(p_nombre);
                             resultado.appendChild(p_cargo);
                             resultado.appendChild(p_email);
                             resultado.appendChild(p_compania);
-                            resultado.appendChild(p_region);
-                            resultado.appendChild(p_pais);
+                            //resultado.appendChild(p_region);
+                            //resultado.appendChild(p_pais);
                             resultado.appendChild(p_ciudad);
-                            resultado.appendChild(p_interes);
-                            resultado.appendChild(p_canalDeContacto);
+                            //resultado.appendChild(p_interes);
+                            //resultado.appendChild(p_canalDeContacto);
+                            
                         }
                     }
                 } else {
@@ -194,9 +203,71 @@ async function buscarContacto() {
         }
 
     }
+
+}
+
+/* let botton = document.getElementById("ocultar"); botton.classList.remove("ocultar"); */ 
+
+
+async function eliminarContacto(id){
+    var result = confirm("Want to delete?");
+    if (result) {
+
+        try {
+            let eliminar = await fetch(`${SERVER_URL}/contactos/eliminarContacto/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json', 
+                    "access-token": `${token}`
+                },
+                //body: JSON.stringify(region)
+            });
+            let eliminada = await eliminar.json();
+            if(eliminada.status == 401){  //es pq no estoy logueado o JWT vencido
+                console.log("Error 401 eliminando contacto...")
+            }else if(eliminada.status == 200){
+                console.log("Se elimino OK!!")
+            } else {
+                console.log("ERROR....");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+}
+
+function prenderBoton () {
+    let botton = document.getElementById("ocultar"); 
+    botton.classList.remove("ocultar");
 }
 
 
+function detectarCheckboxs(){
+    let aux = false;
+    for(i in contactosBuscados){
+        console.log("Busqueda: "+contactosBuscados[i]._id)
+        if(document.getElementById(contactosBuscados[i]._id).checked){
+            console.log("Checkeados: "+ contactosBuscados[i].nombre )
+            eliminarContacto(contactosBuscados[i]._id);
+            console.log("eliminando");
+            aux= true;
+        }
+    }
+    
+    if(aux){
+        location.href="";
+    }
+}
+
+
+
+function eliminarContactoMasivo () {
+    detectarCheckboxs()
+
+
+}
 
 //cargarContactos();
 

@@ -16,7 +16,6 @@ header{
 }
 
 
-
 header .menu_opciones{
     display: flex;
     flex: row;
@@ -151,6 +150,7 @@ i{
 
 .alto{
     height: 500px;
+
 }
 
 footer{
@@ -177,3 +177,23 @@ footer p {
     margin: 25px;
 }
 
+
+.resultado {
+    border-radius: 25px;
+    padding: 15px;
+    border:#006241 solid 3px;
+    width: 80%;
+}
+
+.resultado .titulos {
+    display: grid;
+    grid-template-columns: 100px 200px 200px 200px 300px 200px;
+    grid-template-rows: auto auto auto auto auto auto;
+}
+
+.resultadoApi{
+    display: grid;
+    grid-template-columns:  100px 200px 200px 200px 300px 200px;
+    grid-template-rows: auto auto auto auto auto auto;
+
+}

@@ -35,16 +35,18 @@ let contactos = []
 // Create contact listener
 createBtn.addEventListener('click', crearContacto);
 
-async function verificarProfile() {
-    if (!token) {
+async function verificarProfile(){
+    if(!token){
         localStorage.removeItem('token');
         location.href = "/";
-    } else {
-        if (profile == "admin") {
-            console.log("Soy admin PERRI")
-        } else {
+    }else{
+        if(profile == "admin"){
+            console.log("Soy admin")
+        }else{
             var element = document.getElementById("usuariosMenu");
             element.classList.add("ocultar");
+            var element2 = document.getElementById("usuariosMenuFooter");
+            element2.classList.add("ocultar");
         }
     }
 }

@@ -114,6 +114,10 @@ form input{
     margin: auto;
 }
 
+.alto{
+    height: 700px;
+}
+
 .back {
     margin: 15px;
     display: flex;

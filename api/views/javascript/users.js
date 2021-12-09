@@ -25,6 +25,8 @@ async function verificarProfile(){
         }else{
             var element = document.getElementById("usuariosMenu");
             element.classList.add("ocultar");
+            var element2 = document.getElementById("usuariosMenuFooter");
+            element2.classList.add("ocultar");
         }
     }
 }
